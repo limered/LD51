@@ -15,11 +15,11 @@ jobs:
         projectPath: [game]
         targetPlatform: [WebGL, Android]
         buildPath: [ld51/index.html, ld51.apk]
-      exclude: 
-        - targetPlatform: WebGl
-          buildPath: ld51.apk
-        - targetPlatform: Android
-          buildPath: ld51/index.html
+        exclude: 
+          - targetPlatform: WebGl
+            buildPath: ld51.apk
+          - targetPlatform: Android
+            buildPath: ld51/index.html
 
     steps:
       - name: Checkout repository
