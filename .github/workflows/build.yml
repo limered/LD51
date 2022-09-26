@@ -14,6 +14,12 @@ jobs:
       matrix: 
         projectPath: [game] 
         targetPlatform: [WebGL, Android] 
+        buildPath: [ld51/, ld51.apk] 
+        exclude:  
+          - targetPlatform: WebGl 
+            buildPath: ld51.apk 
+          - targetPlatform: Android 
+            buildPath: ld51/
  
     steps: 
       - name: Checkout repository 
@@ -37,29 +43,18 @@ jobs:
           unityVersion: auto 
           targetPlatform: ${{ matrix.targetPlatform }} 
           buildsPath: build 
-      - name: Display structure of build files 
-        run: ls -R 
-        working-directory: /home/runner 
- 
-      # - name: Zip WebGL build 
-      #   uses: vimtor/action-zip@v1 
-      #   if: ${{ matrix.platform }} == WebGL 
+      # - name: Display structure of build files 
+      #   run: ls -R 
+      #   working-directory: /home/runner 
+      # - uses: actions/upload-artifact@v2 
       #   with: 
-      #     files: ./build/${{ inputs.targetPlatform }}/ld51/ 
-      #     dest: ./build/${{ inputs.targetPlatform }}/ld51-webgl.zip 
- 
-      - name: Upload to itch for webgl 
-        if: ${{ matrix.platform }} == WebGL 
-        uses: ./.github/workflows/deploy.yml 
+      #     name: Build-${{ matrix.targetPlatform }} 
+      #     path: build/${{ matrix.targetPlatform }} 
+      - name: Upload to itch 
+        uses: KikimoraGames/itch-publish@v0.0.3 
         with: 
-          plattform: ${{ matrix.platform }} 
-          artifact: ld51/ 
-          buildChannel: webgl 
- 
-      - name: Upload to itch for android 
-        if: ${{ matrix.platform }} == Android 
-        uses: ./.github/workflows/deploy.yml 
-        with: 
-          plattform: ${{ matrix.platform }} 
-          artifact: ld51.apk 
-          buildChannel: android
+          butlerApiKey: ${{secrets.BUTLER_API_KEY}} 
+          gameData: ./build/${{ matrix.targetPlatform }}/${{ matrix.buildPath }} 
+          itchUsername: ${{secrets.ITCH_USERNAME}} 
+          itchGameId: ${{secrets.ITCH_GAME_ID}} 
+          buildChannel: ${{ matrix.buildPath }} 
