@@ -33,6 +33,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           buildName: ld51
+          projectPath: ./game
           versioning: Semantic
           unityVersion: auto
           targetPlatform: webgl
@@ -63,6 +64,6 @@ jobs:
           gameData: ./build/Android/ld51.apk
           itchUsername: ${{secrets.ITCH_USERNAME}}
           itchGameId: ${{secrets.ITCH_GAME_ID}}
-          buildChannel: "android"
+          buildChannel: webgl
 
       
