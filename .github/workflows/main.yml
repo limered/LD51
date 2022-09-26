@@ -36,8 +36,8 @@ jobs:
           unityVersion: auto
           targetPlatform: ${{ matrix.targgetPlatform }}
           buildsPath: build
-            - uses: actions/upload-artifact@v2
       - name: Display structure of build files
+        uses: actions/upload-artifact@v2
         run: ls -R
         working-directory: build/${{ matrix.targetPlatform }}
       - uses: actions/upload-artifact@v2
