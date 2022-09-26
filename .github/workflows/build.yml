@@ -14,12 +14,13 @@ jobs:
       matrix: 
         projectPath: [game] 
         targetPlatform: [WebGL, Android] 
-        buildPath: [ld51/, ld51.apk] 
-        exclude:  
-          - targetPlatform: WebGl 
-            buildPath: ld51.apk 
+        include:  
           - targetPlatform: Android 
+            buildPath: ld51.apk
+            buildChannel: android
+          - targetPlatform: WebGL 
             buildPath: ld51/
+            buildChannel: webgl
  
     steps: 
       - name: Checkout repository 
@@ -57,4 +58,4 @@ jobs:
           gameData: ./build/${{ matrix.targetPlatform }}/${{ matrix.buildPath }} 
           itchUsername: ${{secrets.ITCH_USERNAME}} 
           itchGameId: ${{secrets.ITCH_GAME_ID}} 
-          buildChannel: ${{ matrix.buildPath }} 
+          buildChannel: ${{ matrix.buildChannel }} 
