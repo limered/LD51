@@ -36,7 +36,7 @@ jobs:
           projectPath: ./game
           versioning: Semantic
           unityVersion: auto
-          targetPlatform: webgl
+          targetPlatform: WebGL
 
       # - name: Display structure of downloaded files
       #   run: ls -R
