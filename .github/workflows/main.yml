@@ -19,8 +19,8 @@ jobs:
       # Cache Library
       - uses: actions/cache@v2
         with:
-          path: Library
-          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          path: ./game/Library
+          key: Library-${{ hashFiles('game/Assets/**', 'game/Packages/**', 'game/ProjectSettings/**') }}
           restore-keys: |
             Library-
 
@@ -61,7 +61,7 @@ jobs:
         uses: KikimoraGames/itch-publish@v0.0.3
         with:
           butlerApiKey: ${{secrets.BUTLER_API_KEY}}
-          gameData: ./build/Android/ld51.apk
+          gameData: ./build/WebGL/index.html
           itchUsername: ${{secrets.ITCH_USERNAME}}
           itchGameId: ${{secrets.ITCH_GAME_ID}}
           buildChannel: webgl
