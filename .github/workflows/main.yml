@@ -6,28 +6,23 @@ on:
       - main
 
 jobs:
-  buildForAllSupportedPlatforms:
+  buildAndTestForLinuxBasedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        targetPlatform:
-          - WebGL
-          - Android
-
+        projectPath: [game]
+        targetPlatform: [WebGL, Android]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Cache Library
+        uses: actions/cache@v2
         with:
-          lfs: false
-
-      - uses: actions/cache@v2
-        with:
-          path: game/Library
+          path: ${{ matrix.projectPath }}/Library
           key: Library-${{ matrix.targetPlatform }}
           restore-keys: Library-
-        
       - name: Build project
         uses: game-ci/unity-builder@v2
         env:
@@ -36,17 +31,15 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           buildName: ld51
-          projectPath: game
+          projectPath: ${{ matrix.projectPath }}
           versioning: Semantic
           unityVersion: auto
           targetPlatform: ${{ matrix.targgetPlatform }}
           buildsPath: build
             - uses: actions/upload-artifact@v2
-
       - name: Display structure of build files
         run: ls -R
         working-directory: build/${{ matrix.targetPlatform }}
-
       - uses: actions/upload-artifact@v2
         with:
           name: Build-${{ matrix.targetPlatform }}
@@ -113,5 +106,3 @@ jobs:
       #     itchUsername: ${{secrets.ITCH_USERNAME}}
       #     itchGameId: ${{secrets.ITCH_GAME_ID}}
       #     buildChannel: webgl
-
-      
