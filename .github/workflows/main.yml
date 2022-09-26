@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         projectPath: [game]
-        targetPlatform: [WebGL, Android]
+        targetPlatform: [Android]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -38,7 +38,7 @@ jobs:
           buildsPath: build
       - name: Display structure of build files
         run: ls -R
-        working-directory: build/${{ matrix.targetPlatform }}
+        working-directory: /home/runner
       - uses: actions/upload-artifact@v2
         with:
           name: Build-${{ matrix.targetPlatform }}
