@@ -34,7 +34,7 @@ jobs:
           projectPath: ${{ matrix.projectPath }}
           versioning: Semantic
           unityVersion: auto
-          targetPlatform: ${{ matrix.targgetPlatform }}
+          targetPlatform: ${{ matrix.targetPlatform }}
           buildsPath: build
       - name: Display structure of build files
         run: ls -R
