@@ -41,12 +41,19 @@ jobs:
         run: ls -R
         working-directory: /home/runner
 
+      # - name: Zip WebGL build
+      #   uses: vimtor/action-zip@v1
+      #   if: ${{ matrix.platform }} == WebGL
+      #   with:
+      #     files: ./build/${{ inputs.targetPlatform }}/ld51/
+      #     dest: ./build/${{ inputs.targetPlatform }}/ld51-webgl.zip
+
       - name: Upload to itch for webgl
         if: ${{ matrix.platform }} == WebGL
         uses: ./.github/workflows/deploy.yml
         with:
           plattform: ${{ matrix.platform }}
-          artifact: ld51/index.html
+          artifact: ld51/
           buildChannel: webgl
 
       - name: Upload to itch for android
