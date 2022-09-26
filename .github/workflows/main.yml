@@ -14,12 +14,6 @@ jobs:
       matrix:
         projectPath: [game]
         targetPlatform: [WebGL, Android]
-        buildPath: [ld51/index.html, ld51.apk]
-        exclude: 
-          - targetPlatform: WebGl
-            buildPath: ld51.apk
-          - targetPlatform: Android
-            buildPath: ld51/index.html
 
     steps:
       - name: Checkout repository
@@ -46,77 +40,19 @@ jobs:
       - name: Display structure of build files
         run: ls -R
         working-directory: /home/runner
-      # - uses: actions/upload-artifact@v2
-      #   with:
-      #     name: Build-${{ matrix.targetPlatform }}
-      #     path: build/${{ matrix.targetPlatform }}
-      - name: Upload to itch
-        uses: KikimoraGames/itch-publish@v0.0.3
+
+      - name: Upload to itch for webgl
+        if: ${{ matrix.platform }} == WebGL
+        uses: ./.github/workflows/deploy.yml
         with:
-          butlerApiKey: ${{secrets.BUTLER_API_KEY}}
-          gameData: ./build/${{ matrix.targetPlatform }}/${{ matrix.buildPath }}
-          itchUsername: ${{secrets.ITCH_USERNAME}}
-          itchGameId: ${{secrets.ITCH_GAME_ID}}
-          buildChannel: ${{ matrix.targetPlatform }}
+          plattform: ${{ matrix.platform }}
+          artifact: ld51/index.html
+          buildChannel: webgl
 
-
-  # build:
-  #   name: Build ✨
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     # Checkout
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v2
-  #       with:
-  #         lfs: false
-
-  #     # Cache Library
-  #     - uses: actions/cache@v2
-  #       with:
-  #         path: game/Library
-  #         key: Library-WebGL
-  #         restore-keys: |
-  #           Library-
-
-  #     # Build
-  #     - name: Build project
-  #       uses: game-ci/unity-builder@v2
-  #       env:
-  #         UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  #         UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-  #         UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-  #       with:
-  #         buildName: ld51
-  #         projectPath: game
-  #         versioning: Semantic
-  #         unityVersion: auto
-  #         targetPlatform: WebGL
-  #         buildsPath: game/build
-
-  #     - name: Display structure of build files
-  #       run: ls -R
-  #       working-directory: /home/runner
-
-  #     # Test
-  #     # - name: Run tests
-  #     #   uses: game-ci/unity-test-runner@v2
-  #     #   env:
-  #     #     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  #     #   with:
-  #     #     githubToken: ${{ secrets.GITHUB_TOKEN }}
-
-  #     # Output
-  #     - uses: actions/upload-artifact@v2
-  #       with:
-  #         name: Build
-  #         path: game/build
-      
-      # Upload to Itch
-      # - name: Upload to itch
-      #   uses: KikimoraGames/itch-publish@v0.0.3
-      #   with:
-      #     butlerApiKey: ${{secrets.BUTLER_API_KEY}}
-      #     gameData: ./build/WebGL/index.html
-      #     itchUsername: ${{secrets.ITCH_USERNAME}}
-      #     itchGameId: ${{secrets.ITCH_GAME_ID}}
-      #     buildChannel: webgl
+      - name: Upload to itch for android
+        if: ${{ matrix.platform }} == Android
+        uses: ./.github/workflows/deploy.yml
+        with:
+          plattform: ${{ matrix.platform }}
+          artifact: ld51.apk
+          buildChannel: android
