@@ -38,9 +38,9 @@ jobs:
           unityVersion: auto
           targetPlatform: WebGL
 
-      # - name: Display structure of downloaded files
-      #   run: ls -R
-      #   working-directory: /home/runner
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: /home/runner
 
       # Test
       # - name: Run tests
@@ -61,7 +61,7 @@ jobs:
         uses: KikimoraGames/itch-publish@v0.0.3
         with:
           butlerApiKey: ${{secrets.BUTLER_API_KEY}}
-          gameData: ./build/WebGL/index.html
+          gameData: ./build/index.html
           itchUsername: ${{secrets.ITCH_USERNAME}}
           itchGameId: ${{secrets.ITCH_GAME_ID}}
           buildChannel: webgl
