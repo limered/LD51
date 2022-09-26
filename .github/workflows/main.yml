@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         projectPath: [game]
-        targetPlatform: [Android]
+        targetPlatform: [WebGL]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
