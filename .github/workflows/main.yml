@@ -19,8 +19,8 @@ jobs:
       # Cache Library
       - uses: actions/cache@v2
         with:
-          path: ./game/Library
-          key: Library-${{ hashFiles('game/Assets/**', 'game/Packages/**', 'game/ProjectSettings/**') }}
+          path: game/Library
+          key: Library-WebGL
           restore-keys: |
             Library-
 
@@ -33,12 +33,13 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           buildName: ld51
-          projectPath: ./game
+          projectPath: game
           versioning: Semantic
           unityVersion: auto
           targetPlatform: WebGL
+          buildsPath: game/build
 
-      - name: Display structure of downloaded files
+      - name: Display structure of build files
         run: ls -R
         working-directory: /home/runner
 
@@ -51,19 +52,19 @@ jobs:
       #     githubToken: ${{ secrets.GITHUB_TOKEN }}
 
       # Output
-      # - uses: actions/upload-artifact@v2
-      #   with:
-      #     name: Build
-      #     path: build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Build
+          path: game/build
       
       # Upload to Itch
-      - name: Upload to itch
-        uses: KikimoraGames/itch-publish@v0.0.3
-        with:
-          butlerApiKey: ${{secrets.BUTLER_API_KEY}}
-          gameData: ./build/index.html
-          itchUsername: ${{secrets.ITCH_USERNAME}}
-          itchGameId: ${{secrets.ITCH_GAME_ID}}
-          buildChannel: webgl
+      # - name: Upload to itch
+      #   uses: KikimoraGames/itch-publish@v0.0.3
+      #   with:
+      #     butlerApiKey: ${{secrets.BUTLER_API_KEY}}
+      #     gameData: ./build/WebGL/index.html
+      #     itchUsername: ${{secrets.ITCH_USERNAME}}
+      #     itchGameId: ${{secrets.ITCH_GAME_ID}}
+      #     buildChannel: webgl
 
       
