@@ -13,11 +13,11 @@ jobs:
       fail-fast: false 
       matrix: 
         projectPath: [game] 
-        targetPlatform: [WebGL, Android] 
+        targetPlatform: [WebGL, StandaloneWindows] 
         include:  
-          - targetPlatform: Android 
-            buildPath: ld51.apk
-            buildChannel: android
+          - targetPlatform: StandaloneWindows 
+            buildPath: ld51/
+            buildChannel: windows
           - targetPlatform: WebGL 
             buildPath: ld51/
             buildChannel: webgl
