@@ -16,10 +16,10 @@ jobs:
         targetPlatform: [WebGL, StandaloneWindows] 
         include:  
           - targetPlatform: StandaloneWindows 
-            buildPath: ld51/
+            buildPath: '/'
             buildChannel: windows
           - targetPlatform: WebGL 
-            buildPath: ld51/
+            buildPath: /ld51/
             buildChannel: webgl
  
     steps: 
@@ -55,7 +55,7 @@ jobs:
         uses: KikimoraGames/itch-publish@v0.0.3 
         with: 
           butlerApiKey: ${{secrets.BUTLER_API_KEY}} 
-          gameData: ./build/${{ matrix.targetPlatform }}/${{ matrix.buildPath }} 
+          gameData: ./build/${{ matrix.targetPlatform }}${{ matrix.buildPath }} 
           itchUsername: ${{secrets.ITCH_USERNAME}} 
           itchGameId: ${{secrets.ITCH_GAME_ID}} 
           buildChannel: ${{ matrix.buildChannel }} 
