@@ -1,4 +1,5 @@
 using SystemBase.Core;
+using Systems.Time.Events;
 using UniRx;
 using Unity.Mathematics;
 using UnityEngine;
@@ -11,10 +12,20 @@ namespace Systems.Test
     {
         public override void Register(TestComponent component)
         {
+            MessageBroker.Default.Receive<TickEvent>()
+                .Subscribe(_ => ChangeAnimationParams(component))
+                .AddTo(component);
+            
             SystemUpdate(component).Subscribe(Animate).AddTo(component);
         }
 
-        private void Animate(TestComponent test)
+        private static void ChangeAnimationParams(TestComponent test)
+        {
+            test.transform.rotation = Random.rotationUniform;
+            test.transform.localScale = Random.insideUnitSphere;
+        }
+
+        private static void Animate(TestComponent test)
         {
             var nextPosition = test.transform.position +
                                (Vector3) (math.float3(test.direction) *
