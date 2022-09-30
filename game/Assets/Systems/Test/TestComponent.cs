@@ -8,6 +8,6 @@ namespace Systems.Test
         [SerializeField] public Vector3 speed;
         [SerializeField] public Bounds bounds;
 
-        [HideInInspector] public Vector3 direction;
+        public Vector3 direction = Vector3.forward;
     }
 }
