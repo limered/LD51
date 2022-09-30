@@ -41,7 +41,7 @@ jobs:
           buildName: ld51 
           projectPath: ${{ matrix.projectPath }} 
           versioning: Semantic 
-          unityVersion: auto 
+          unityVersion: 2021.3.10f1 
           targetPlatform: ${{ matrix.targetPlatform }} 
           buildsPath: build 
       # - name: Display structure of build files 
