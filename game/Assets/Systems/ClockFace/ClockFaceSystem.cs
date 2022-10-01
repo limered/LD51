@@ -25,12 +25,12 @@ namespace Systems.ClockFace
         private void AnimateHands(ClockFaceComponent clock)
         {
             var progress = _timer.Value.progress.Value * 10;
-
             var start = math.floor(progress);
             var t = math.frac(progress);
             var posInRange = math.smoothstep(0, 1, t);
-            
             clock.SecondHand.transform.rotation = Quaternion.Euler(0, 0, (posInRange + start) * -36);
+            
+            clock.MainHand.transform.rotation = Quaternion.Euler(0, 0, (UnityEngine.Time.realtimeSinceStartup / -6) % 360);
         }
 
         public override void Register(TimeComponent component)
