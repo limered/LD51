@@ -14,8 +14,8 @@ namespace Systems.Properties
 
         /// <summary>
         /// Get all categories of template text:
-        /// "Hello, my name is {Name}. I love {Pets}. Searching for a partner with {Degree} {Personality}, who would take me to a trip to {TravelLocation}."
-        /// would have: Name, Pets, Degree, Personality, TravelLocation
+        /// "Hello, my name is {Name}. I love {Pets}. Searching for a partner with {Degree} {Personality}, who would take me to a trip to {TravelLocation} or {TravelLocation}."
+        /// would have: Name, Pets, Degree, Personality, TravelLocation, TravelLocation
         /// </summary>
         public IEnumerable<Category> Categories
         {
@@ -23,11 +23,18 @@ namespace Systems.Properties
             {
                 var names = typeof(Category).GetEnumNames();
                 var values = typeof(Category).GetEnumValues();
-                for (var i = 0; i < values.Length; i++)
+                for (var i = 0; i < template.Length; i++)
                 {
-                    if (template.Contains($"{{{names[i]}}}"))
+                    if (template[i] == '{')
                     {
-                        yield return (Category)values.GetValue(i);
+                        for (var c = 0; c < names.Length; c++)
+                        {
+                            if (template.Substring(i).StartsWith($"{{{names[c]}}}"))
+                            {
+                                i += $"{{{names[c]}}}".Length - 1;
+                                yield return (Category)values.GetValue(c);
+                            }
+                        }
                     }
                 }
             }
@@ -58,9 +65,11 @@ namespace Systems.Properties
                         if (template.Substring(i).StartsWith($"{{{category}}}"))
                         {
                             i += $"{{{category}}}".Length - 1;
-                            Debug.Assert(dict[category].Count > 0, "not enough personality traits for this template");
-                            text += dict[category].First();
+                            Debug.Assert(dict.ContainsKey(category), $"missing personality trait: {category}");
+                            var what = dict[category].First();
+                            text += what;
                             dict[category].RemoveAt(0);
+                            dict[category].Add(what);
                             break;
                         }
                     }
