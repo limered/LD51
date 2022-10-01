@@ -6,6 +6,7 @@ Shader "Unlit/Window"
         _Size ("Size", float) = 1.0
         _T ("Time", float) = 1.0
         _Distortion ("Distortion", range(-5, 5)) = 1
+        _Blur ("Blur", range(0, 1)) = 1
     }
     SubShader
     {
@@ -38,7 +39,7 @@ Shader "Unlit/Window"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-            float _Size, _T, _Distortion;
+            float _Size, _T, _Distortion, _Blur;
             
             v2f vert (appdata v)
             {
@@ -55,13 +56,10 @@ Shader "Unlit/Window"
                 p += dot(p, p+34.345);
                 return frac(p.x*p.y);
             }
-            fixed4 frag (v2f i) : SV_Target
+            float3 Layer(float2 UV, float t)
             {
-                float t = fmod(_Time.y + _T, 7200);
-                float4 col = 0;
-
                 float2 aspect = float2(2, 1);
-                float2 uv = i.uv * _Size * aspect;
+                float2 uv = UV * _Size * aspect;
                 uv.y += t * .25;
                 float2 gv = frac(uv)-.5;
                 float2 id = floor(uv);
@@ -69,7 +67,7 @@ Shader "Unlit/Window"
                 float n = N21(id); // 0 1
                 t += n * 6.2831;
                 
-                float w = i.uv.y * 10;
+                float w = UV.y * 10;
                 float x = (n - .5) * .8; // -.4 .4
                 x += (.4 - abs(x)) * sin(3*w)*pow(sin(w), 6) * .45;
                 
@@ -86,14 +84,22 @@ Shader "Unlit/Window"
                 fogTrail *= S(.5, y, gv.y);
                 trail *= fogTrail;
 
-                fogTrail *= S(.05, .04, abs(dropPos.x));
-                col += fogTrail * .5;
-                col += trail;
-                col += drop;
-                // if(gv.x > .48 || gv.y>.49) col = float4(1, 0, 0, 1);
-                // col *= 0; col += N21(id);
                 float2 offs = drop * dropPos + trail * trailPos;
-                col = tex2D(_MainTex, i.uv + offs * _Distortion);
+                fogTrail *= S(.05, .04, abs(dropPos.x));
+
+                return float3(offs, fogTrail);
+            }
+            fixed4 frag (v2f i) : SV_Target
+            {
+                float t = fmod(_Time.y + _T, 7200);
+
+                float3 drops = Layer(i.uv, t);
+                drops += Layer(i.uv * 1.23 + 7.54, t);
+                drops += Layer(i.uv * 1.35 + 1.54, t);
+                drops += Layer(i.uv * 1.57 - 7.54, t);
+
+                float blur = _Blur * 7 * (1 - drops.z);
+                float4 col = tex2Dlod(_MainTex, float4(i.uv + drops.xy * _Distortion, 0, blur));
                 return col;
             }
             ENDCG
