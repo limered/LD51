@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292bd19973024115b82b58c82eea816c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainHand: {fileID: 0}
+  MainHand: {fileID: 3346206470253375153}
   SecondHand: {fileID: 3600373078203090828}
 --- !u!1 &1096812242
 GameObject:
@@ -903,6 +903,12 @@ PrefabInstance:
 --- !u!224 &1793243853827252683 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1793243854032513631, guid: 0e77505834fa933409d3deacc3e29b8f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1950616468}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3346206470253375153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3346206469922284837, guid: 0e77505834fa933409d3deacc3e29b8f,
     type: 3}
   m_PrefabInstance: {fileID: 1950616468}
   m_PrefabAsset: {fileID: 0}
