@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 690005089, guid: 9d914cef451b25c47a979ad60515132b, type: 3}
+      propertyPath: MainHand
+      value: 
+      objectReference: {fileID: 599247813}
     - target: {fileID: 839526456441375795, guid: 9d914cef451b25c47a979ad60515132b,
         type: 3}
       propertyPath: m_Name
@@ -475,6 +479,12 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1 &599247813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3346206470253375153, guid: 9d914cef451b25c47a979ad60515132b,
+    type: 3}
+  m_PrefabInstance: {fileID: 161106973}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
