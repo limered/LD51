@@ -2,6 +2,7 @@
 using SystemBase.Utils;
 using Systems.Time;
 using UniRx;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Systems.ClockFace
@@ -23,11 +24,13 @@ namespace Systems.ClockFace
 
         private void AnimateHands(ClockFaceComponent clock)
         {
-            var progress = _timer.Value.progress.Value;
+            var progress = _timer.Value.progress.Value * 10;
 
-            var handTransform = clock.SecondHand.transform;
-            // clock.SecondHand.transform.localRotation = Quaternion.identity;
-            handTransform.rotation = Quaternion.Euler(0, 0, progress * -360);
+            var start = math.floor(progress);
+            var t = math.frac(progress);
+            var posInRange = math.smoothstep(0, 1, t);
+            
+            clock.SecondHand.transform.rotation = Quaternion.Euler(0, 0, (posInRange + start) * -36);
         }
 
         public override void Register(TimeComponent component)
