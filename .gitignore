@@ -63,8 +63,8 @@ crashlytics-build.properties
 
 **/.idea/
 
-Why is it always Projekt/.vscode/
+game/.vscode/
 
-Why is it always Projekt/UserSettings/Layouts/default-2021.dwlt
+game/UserSettings/Layouts/default-2021.dwlt
 
-Why is it always Projekt/_ReSharper.Caches/
+game/_ReSharper.Caches/
