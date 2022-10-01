@@ -33,9 +33,45 @@ namespace Systems.Properties
             }
         }
 
-        public string Create(IEnumerable<PersonalityTrait> traits)
+        public string CreateText(IEnumerable<PersonalityTrait> traits)
         {
-            return null;
+            var dict = new Dictionary<Category, List<string>>();
+            foreach (var trait in traits)
+            {
+                if (dict.ContainsKey(trait.category))
+                {
+                    dict[trait.category].Add(trait.text);
+                }
+                else
+                {
+                    dict.Add(trait.category, new List<string> { trait.text });
+                }
+            }
+
+            var text = "";
+            for (var i = 0; i < template.Length; i++)
+            {
+                if (template[i] == '{')
+                {
+                    foreach (var category in dict.Keys)
+                    {
+                        if (template.Substring(i).StartsWith($"{{{category}}}"))
+                        {
+                            i += $"{{{category}}}".Length - 1;
+                            Debug.Assert(dict[category].Count > 0, "not enough personality traits for this template");
+                            text += dict[category].First();
+                            dict[category].RemoveAt(0);
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    text += template[i];
+                }
+            }
+
+            return text;
         }
     }
 }
