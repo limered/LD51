@@ -20,6 +20,8 @@ namespace Systems.Properties
         Degree,
         Relation,
         Religion,
+        Personality,
+        Music,
     }
     
     [CreateAssetMenu]

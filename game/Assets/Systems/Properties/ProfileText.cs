@@ -1,33 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Systems.Properties
-{   
-    /// <summary>
-    /// template text contains placeholder in form {??}
-    /// {name}: Anna Bell, Irvin Irwich, ...
-    /// {food_type}: vegetarian, carnivore, vegan, paleo 
-    /// {hobby}: tennis, football, cooking, tattoos, netflix, swimming
-    /// {travel_location}: paris, north pole, hell, disneyland, ...
-    /// {religion}: dooms day cult, happy tree friends, atheism, ...
-    /// {degree}: hard, soft, long, cool, hot, dark, bright,...
-    /// {relationship}: friends, homies, bros, family, sisters, coworkers, ... 
-    /// </summary>
+{
     [CreateAssetMenu]
     public class ProfileText : ScriptableObject
     {
         public Guid guid = new();
         public string template;
 
-        public IEnumerable<PersonalityTrait> Traits
+        /// <summary>
+        /// Get all categories of template text:
+        /// "Hello, my name is {Name}. I love {Pets}. Searching for a partner with {Degree} {Personality}, who would take me to a trip to {TravelLocation}."
+        /// would have: Name, Pets, Degree, Personality, TravelLocation
+        /// </summary>
+        public IEnumerable<Category> Categories
         {
             get
             {
-                return null;
+                var names = typeof(Category).GetEnumNames();
+                var values = typeof(Category).GetEnumValues();
+                for (var i = 0; i < values.Length; i++)
+                {
+                    if (template.Contains($"{{{names[i]}}}"))
+                    {
+                        yield return (Category)values.GetValue(i);
+                    }
+                }
             }
         }
-        
+
         public string Create(IEnumerable<PersonalityTrait> traits)
         {
             return null;
