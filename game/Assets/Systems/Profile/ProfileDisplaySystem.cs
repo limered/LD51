@@ -7,11 +7,11 @@ namespace Assets.Systems.Profile
     [GameSystem(typeof(ProfileSystem))]
     public class ProfileDisplaySystem : GameSystem<ProfileConfigComponent>
     {
-        public override void Register(ProfileConfigComponent displaySystem)
+        public override void Register(ProfileConfigComponent component)
         {
             var profileSystem = IoC.Game.System<ProfileSystem>();
-            profileSystem.ActiveProfile.Subscribe(newProfile => UpdateProfile(displaySystem, newProfile))
-                .AddTo(displaySystem);
+            profileSystem.ActiveProfile.Subscribe(newProfile => UpdateProfile(component, newProfile))
+                .AddTo(component);
         }
 
         private static void UpdateProfile(ProfileConfigComponent profileConfigDisplaySystem, DisplayProfile newProfile)

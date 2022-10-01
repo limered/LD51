@@ -34,11 +34,7 @@ namespace Assets.Systems.Profile
         
         public override void Register(RatingButtonComponent component)
         {
-            component.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                Debug.Log("show next");
-                RateAndShowNext(component.rating);
-            });
+            component.Command.Subscribe(RateAndShowNext).AddTo(component);
         }
 
         public void RateAndShowNext(Rating rating)
