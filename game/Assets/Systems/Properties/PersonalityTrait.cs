@@ -5,8 +5,8 @@ namespace Systems.Properties
 {
     public enum PropertyLocation
     {
-        Image,
         Text,
+        Image,
     }
 
     public enum Category
@@ -15,6 +15,11 @@ namespace Systems.Properties
         FoodType,
         Pets,
         Sport,
+        Hobby,
+        TravelLocation,
+        Degree,
+        Relation,
+        Religion,
     }
     
     [CreateAssetMenu]
