@@ -1,4 +1,4 @@
-﻿namespace Assets.Systems.Profile
+﻿namespace Systems.Profile
 {
     public enum Rating
     {

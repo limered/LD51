@@ -1,8 +1,8 @@
-﻿namespace Assets.Systems.Profile
+﻿namespace Systems.Profile
 {
     public class DisplayProfile
     {
-        public global::Systems.Properties.Profile Profile { get; set; }
+        public global::Systems.Profile.ScriptableObjects.Profile Profile { get; set; }
         public Rating? Rating { get; set; }
     }
 }

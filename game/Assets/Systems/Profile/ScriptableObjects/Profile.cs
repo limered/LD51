@@ -1,7 +1,6 @@
-﻿using Systems.Properties;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Systems.Properties
+namespace Systems.Profile.ScriptableObjects
 {
     [CreateAssetMenu(menuName = "LD51/Profile", fileName = "Profile", order = 0)]
     public class Profile : ScriptableObject

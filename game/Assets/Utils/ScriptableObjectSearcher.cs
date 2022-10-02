@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Systems.Properties;
+using Systems.Profile.ScriptableObjects;
 using UnityEngine;
 
 namespace Assets.Utils

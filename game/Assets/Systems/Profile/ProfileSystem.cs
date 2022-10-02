@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Assets.Utils;
 using SystemBase.Core;
 using SystemBase.Utils;
-using Systems.Properties;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace Assets.Systems.Profile
+namespace Systems.Profile
 {
     [GameSystem]
     public class ProfileSystem : GameSystem<ProfileConfigComponent, RatingButtonComponent>
@@ -30,7 +27,7 @@ namespace Assets.Systems.Profile
                     profileSprites.Enqueue(profileSprites.Dequeue());
                     return profile;
                 })
-                .Concat(ScriptableObjectSearcher.GetAllInstances<Profile>())
+                .Concat(ScriptableObjectSearcher.GetAllInstances<global::Systems.Profile.ScriptableObjects.Profile>())
                 .Select(p => new DisplayProfile { Profile = p, Rating = null })
                 .ToList();
 
@@ -52,9 +49,9 @@ namespace Assets.Systems.Profile
             ActiveProfile.Value = _profiles.Peek();
         }
 
-        public global::Systems.Properties.Profile GenerateProfile()
+        public global::Systems.Profile.ScriptableObjects.Profile GenerateProfile()
         {
-            var profile = ScriptableObject.CreateInstance<global::Systems.Properties.Profile>();
+            var profile = ScriptableObject.CreateInstance<global::Systems.Profile.ScriptableObjects.Profile>();
             profile.name = AmericanNameGenerator.GenerateName(AmericanNameGenerator.Gender.Neutral);
             profile.age = Random.Range(18, 99);
             profile.distance = Random.Range(0f, 1000f);

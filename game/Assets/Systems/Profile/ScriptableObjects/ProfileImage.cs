@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Systems.Properties
+namespace Systems.Profile.ScriptableObjects
 {
     [CreateAssetMenu(menuName = "LD51/ProfileImage", fileName = "ProfileImage")]
     public class ProfileImage : ScriptableObject

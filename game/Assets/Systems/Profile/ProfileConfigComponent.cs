@@ -1,7 +1,7 @@
 ﻿using SystemBase.Core;
 using UnityEngine;
 
-namespace Assets.Systems.Profile
+namespace Systems.Profile
 {
     public class ProfileConfigComponent : GameComponent
     {

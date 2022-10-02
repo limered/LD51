@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Systems.Properties
+namespace Systems.Profile.ScriptableObjects
 {
     [CreateAssetMenu(menuName = "LD51/ProfileText", fileName = "ProfileText")]
     public class ProfileText : ScriptableObject

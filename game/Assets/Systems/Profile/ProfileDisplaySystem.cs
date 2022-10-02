@@ -2,7 +2,7 @@
 using SystemBase.Utils;
 using UniRx;
 
-namespace Assets.Systems.Profile
+namespace Systems.Profile
 {
     [GameSystem(typeof(ProfileSystem))]
     public class ProfileDisplaySystem : GameSystem<ProfileUIConfigComponent>

@@ -1,8 +1,7 @@
 ﻿using SystemBase.Core;
 using UniRx;
-using UnityEngine;
 
-namespace Assets.Systems.Profile
+namespace Systems.Profile
 {
     public class RatingButtonComponent : GameComponent
     {

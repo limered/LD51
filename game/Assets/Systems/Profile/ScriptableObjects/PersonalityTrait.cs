@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Systems.Properties
+namespace Systems.Profile.ScriptableObjects
 {
     public enum PropertyLocation
     {
