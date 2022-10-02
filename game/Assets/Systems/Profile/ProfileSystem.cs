@@ -49,44 +49,31 @@ namespace Systems.Profile
             MessageBroker.Default.Receive<TickEvent>().Subscribe(_ => ShowNext(component)).AddTo(component);
         }
 
-        private void ShowNext(ProfileConfigComponent profileConfigComponent)
-        {
-            if (profileConfigComponent.debugSwitchProfiles || !_profiles.Any()) return;
-
-            var rating = profileConfigComponent.activeProfile.Value.Rating;
-            if (rating == Rating.Dislike)
-            {
-                _profiles.Enqueue(_profiles.Dequeue());
-            }
-            else
-            {
-                var profile = _profiles.Dequeue();
-                MessageBroker.Default
-                    .Publish(new ActiveProfileChangedEvent {lastProfile = profile});
-            }
-
-            if (_profiles.Any())
-            {
-                _profileConfig.activeProfile.Value = _profiles.Peek();
-            }
-            else
-            {
-                // ToDo Forever Alone Image
-            }
-        }
-
         public override void Register(RatingButtonComponent component)
         {
             component.Command.Subscribe(RateAndShowNext).AddTo(component);
         }
 
-        public void RateAndShowNext(Rating rating)
+        private void ShowNext(ProfileConfigComponent profileConfigComponent)
+        {
+            if (profileConfigComponent.debugSwitchProfiles || !_profiles.Any()) return;
+
+            var rating = profileConfigComponent.activeProfile.Value.Rating;
+            SwitchToNextProfile(rating);
+        }
+
+        private void RateAndShowNext(Rating rating)
         {
             if (_profileConfig == null || _profiles == null) return;
             _profileConfig.activeProfile.Value.Rating = rating;
 
             if (!_profileConfig.debugSwitchProfiles || !_profiles.Any()) return;
+            SwitchToNextProfile(rating);
+        }
 
+
+        private void SwitchToNextProfile(Rating? rating)
+        {
             if (rating == Rating.Dislike)
             {
                 _profiles.Enqueue(_profiles.Dequeue());
@@ -108,7 +95,7 @@ namespace Systems.Profile
             }
         }
 
-        public ProfileSo GenerateProfile(ProfileImage profileImage)
+        private ProfileSo GenerateProfile(ProfileImage profileImage)
         {
             var profile = ScriptableObject.CreateInstance<ProfileSo>();
             profile.profileImage = profileImage;
