@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Assets.Utils;
 using SystemBase.Core;
 using SystemBase.Utils;
 using Systems.Profile;
@@ -15,18 +14,20 @@ namespace Systems.Player
     {
         public override void Register(WishlistComponent wishList)
         {
-            FillWishes(wishList);
-
             wishList.likedProfiles = new List<DisplayProfile>();
 
             MessageBroker.Default.Receive<ActiveProfileChangedEvent>()
                 .Subscribe(msg => SaveLikedProfiles(msg, wishList))
                 .AddTo(wishList);
+
+            MessageBroker.Default.Receive<ProfileQueueFilledEvent>()
+                .Subscribe(msg => FillWishes(msg, wishList))
+                .AddTo(wishList);
         }
 
-        private void FillWishes(WishlistComponent wishList)
+        private void FillWishes(ProfileQueueFilledEvent msg, WishlistComponent wishList)
         {
-            var allTraits = ScriptableObjectSearcher.GetAllPersonalityTraits().Randomize();
+            var allTraits = msg.UsedTraits().Randomize();
             var positivesCount = Random.Range(wishList.wantPositivesMinMax.x, wishList.wantPositivesMinMax.y);
             var negativesCount = Random.Range(wishList.wantNegativeMinMax.x, wishList.wantNegativeMinMax.y);
 
@@ -46,16 +47,10 @@ namespace Systems.Player
             var profileTraits = msg.lastProfile.AllTraits();
             var foundPositive = wishList.wantPositives.FindAll(trait => profileTraits.Contains(trait.trait));
             var foundNegatives = wishList.wantNegatives.FindAll(trait => profileTraits.Contains(trait.trait));
-            foreach (var checkedTrait in foundPositive)
-            {
-                checkedTrait.state = PersonalityCheckState.Checked;
-            }
+            foreach (var checkedTrait in foundPositive) checkedTrait.state = PersonalityCheckState.Checked;
             // Check for Win
 
-            foreach (var checkedTrait in foundNegatives)
-            {
-                checkedTrait.state = PersonalityCheckState.Checked;
-            }
+            foreach (var checkedTrait in foundNegatives) checkedTrait.state = PersonalityCheckState.Checked;
             // Check for Loss
         }
     }

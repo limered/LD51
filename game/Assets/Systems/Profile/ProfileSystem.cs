@@ -20,22 +20,23 @@ namespace Systems.Profile
         public override void Register(ProfileConfigComponent component)
         {
             _profileConfig = component;
-            
+
             var randomImages = ScriptableObjectSearcher.AllProfileImages()
-                .Where(image => !image.shouldNotBeRandom)
-                .ToList()
-                .Randomize();
+                .Where(image => !image.shouldNotBeRandom);
 
             var randomProfiles = randomImages
                 .Select(GenerateProfile);
 
             var allProfiles = randomProfiles
-                .Concat(ScriptableObjectSearcher.GetAllInstances<ProfileSo>());
+                .Concat(ScriptableObjectSearcher.GetAllInstances<ProfileSo>())
+                .ToList().Randomize();
 
             _profiles = new Queue<DisplayProfile>(allProfiles
                 .Select(profile => new DisplayProfile {Profile = profile, Rating = null}));
-            
+
             component.activeProfile.Value = _profiles.Peek();
+
+            MessageBroker.Default.Publish(new ProfileQueueFilledEvent {queue = _profiles});
         }
 
         public override void Register(RatingButtonComponent component)
@@ -55,9 +56,9 @@ namespace Systems.Profile
             {
                 var profile = _profiles.Dequeue();
                 MessageBroker.Default
-                    .Publish(new ActiveProfileChangedEvent{lastProfile = profile});
-                
+                    .Publish(new ActiveProfileChangedEvent {lastProfile = profile});
             }
+
             _profileConfig.activeProfile.Value = _profiles.Peek();
         }
 
@@ -68,7 +69,7 @@ namespace Systems.Profile
             profile.name = AmericanNameGenerator.GenerateName(AmericanNameGenerator.Gender.Neutral);
             profile.age = Random.Range(18, 99);
             profile.distance = Random.Range(0f, 1000f);
-            
+
             var allTraits = ScriptableObjectSearcher.GetAllPersonalityTraits();
             var allTexts = ScriptableObjectSearcher.GetAllProfileTexts();
 
