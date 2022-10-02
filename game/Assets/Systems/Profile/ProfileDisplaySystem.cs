@@ -5,22 +5,22 @@ using UniRx;
 namespace Assets.Systems.Profile
 {
     [GameSystem(typeof(ProfileSystem))]
-    public class ProfileDisplaySystem : GameSystem<ProfileConfigComponent>
+    public class ProfileDisplaySystem : GameSystem<ProfileUIConfigComponent>
     {
-        public override void Register(ProfileConfigComponent component)
+        public override void Register(ProfileUIConfigComponent component)
         {
             var profileSystem = IoC.Game.System<ProfileSystem>();
             profileSystem.ActiveProfile.Subscribe(newProfile => UpdateProfile(component, newProfile))
                 .AddTo(component);
         }
 
-        private static void UpdateProfile(ProfileConfigComponent profileConfigDisplaySystem, DisplayProfile newProfile)
+        private static void UpdateProfile(ProfileUIConfigComponent profileUIConfigDisplaySystem, DisplayProfile newProfile)
         {
-            profileConfigDisplaySystem.imageElement.sprite = newProfile.Profile.avatar;
-            profileConfigDisplaySystem.nameTextElement.text = newProfile.Profile.name;
-            profileConfigDisplaySystem.ageTextElement.text = $"{newProfile.Profile.age} years";
-            profileConfigDisplaySystem.distanceTextElement.text = $"{newProfile.Profile.distance:F1} miles away";
-            profileConfigDisplaySystem.bioTextElement.text = newProfile.Profile.text;
+            profileUIConfigDisplaySystem.imageElement.sprite = newProfile.Profile.avatar;
+            profileUIConfigDisplaySystem.nameTextElement.text = newProfile.Profile.name;
+            profileUIConfigDisplaySystem.ageTextElement.text = $"{newProfile.Profile.age} years";
+            profileUIConfigDisplaySystem.distanceTextElement.text = $"{newProfile.Profile.distance:F1} miles away";
+            profileUIConfigDisplaySystem.bioTextElement.text = newProfile.Profile.text;
         }
     }
 }

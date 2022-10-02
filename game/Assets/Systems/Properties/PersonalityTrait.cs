@@ -11,7 +11,6 @@ namespace Systems.Properties
 
     public enum Category
     {
-        Name,
         Food,
         Pets,
         Sport,

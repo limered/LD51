@@ -18,20 +18,28 @@ namespace Assets.Systems.Profile
         public ReactiveProperty<DisplayProfile> ActiveProfile { get; } = new();
         private Queue<DisplayProfile> _profiles;
 
-        public override void Register(ProfileConfigComponent displaySystem)
+        public override void Register(ProfileConfigComponent component)
         {
-            var profiles = Enumerable.Range(0, displaySystem.randomProfiles)
-                .Select(_ => GenerateProfile())
+            var profileSprites = new Queue<Sprite>(component.profileSprites.ToList().Randomize());
+
+            var profiles = Enumerable.Range(0, component.randomProfiles)
+                .Select(_ =>
+                {
+                    var profile = GenerateProfile();
+                    profile.avatar = profileSprites.Peek();
+                    profileSprites.Enqueue(profileSprites.Dequeue());
+                    return profile;
+                })
                 .Concat(ScriptableObjectSearcher.GetAllInstances<Profile>())
                 .Select(p => new DisplayProfile { Profile = p, Rating = null })
                 .ToList();
 
             profiles = profiles.Randomize();
-            
+
             _profiles = new Queue<DisplayProfile>(profiles);
             ActiveProfile.Value = _profiles.Peek();
         }
-        
+
         public override void Register(RatingButtonComponent component)
         {
             component.Command.Subscribe(RateAndShowNext).AddTo(component);
@@ -51,11 +59,9 @@ namespace Assets.Systems.Profile
             profile.age = Random.Range(18, 99);
             profile.distance = Random.Range(0f, 1000f);
 
-            var nameTrait = ScriptableObject.CreateInstance<PersonalityTrait>();
-            nameTrait.category = Category.Name;
-            nameTrait.text = profile.name;
+            
             var allTraits = ScriptableObjectSearcher.GetAllPersonalityTraits()
-                .Append(nameTrait).ToArray();
+                .ToArray();
             var allTexts = ScriptableObjectSearcher.GetAllProfileTexts();
 
             var randomProfileTextTemplate = allTexts.RandomElement();
@@ -63,9 +69,11 @@ namespace Assets.Systems.Profile
                 .Select(category => allTraits
                     .Where(t => t.category == category)
                     .ToArray()
-                    .RandomElement());
+                    .RandomElement())
+                .ToArray();
 
-            profile.text = randomProfileTextTemplate.CreateText(traits);
+            profile.text = randomProfileTextTemplate.CreateText(traits, profile.name);
+            profile.traits = traits;
 
             return profile;
         }

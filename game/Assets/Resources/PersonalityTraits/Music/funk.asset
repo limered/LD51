@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fba33c74226593e40841ca3e3c49c25b, type: 3}
-  m_Name: Girl1
+  m_Script: {fileID: 11500000, guid: f3fb4afc9d634b6eb05419344824d3b5, type: 3}
+  m_Name: funk
   m_EditorClassIdentifier: 
-  avatar: {fileID: 21300000, guid: 18449c5a178b8e74288e2eae093aec1f, type: 3}
-  name: Girl1
+  category: 10
+  text: Funk
+  propertyLocation: 0
