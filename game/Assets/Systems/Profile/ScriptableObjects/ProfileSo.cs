@@ -7,6 +7,7 @@ namespace Systems.Profile.ScriptableObjects
     {
         public ProfileImage profileImage;
         public new string name;
+        [TextArea(30, 60)]
         public string text;
         public int age;
         public float distance;

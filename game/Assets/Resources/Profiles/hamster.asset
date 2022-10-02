@@ -14,8 +14,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   profileImage: {fileID: 11400000, guid: 1025f0dbed94a4241bb3d729f589e34c, type: 2}
   name: Hansel
-  text: 
+  text: '"So needless to say
+
+    I''m odds and ends
+
+    But I''ll be stumbling
+    away
+
+    Slowly learning that life is okay
+
+    Say after me
+
+    It''s no
+    better to be safe than sorry
+
+
+    Take on me, take on me,
+
+    Take me on,
+    take on me,
+
+    I''ll be gone
+
+    In a day or two"
+
+
+    Hansel here.
+
+
+    I
+    love cleaning dust and listen to music!
+
+
+'
   age: 3
   distance: 1
   traits:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 72d6803c1cb83eb4e933e6f01ded7e95, type: 2}
+  - {fileID: 11400000, guid: bdfc801551e5a864f9c857e50fa1bfdc, type: 2}
