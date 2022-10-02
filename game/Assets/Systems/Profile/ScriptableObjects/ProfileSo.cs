@@ -6,7 +6,6 @@ namespace Systems.Profile.ScriptableObjects
     public class ProfileSo : ScriptableObject
     {
         public ProfileImage profileImage;
-        public Sprite avatar;
         public new string name;
         public string text;
         public int age;
