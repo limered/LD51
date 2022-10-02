@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fba33c74226593e40841ca3e3c49c25b, type: 3}
+  m_Name: hamster
+  m_EditorClassIdentifier: 
+  profileImage: {fileID: 11400000, guid: 1025f0dbed94a4241bb3d729f589e34c, type: 2}
+  name: Hansel
+  text: 
+  age: 3
+  distance: 1
+  traits:
+  - {fileID: 0}
