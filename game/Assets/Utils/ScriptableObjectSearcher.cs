@@ -20,5 +20,10 @@ namespace Assets.Utils
         {
             return GetAllInstances<ProfileText>();
         }
+
+        public static ProfileImage[] AllProfileImages()
+        {
+            return GetAllInstances<ProfileImage>();
+        }
     }
 }

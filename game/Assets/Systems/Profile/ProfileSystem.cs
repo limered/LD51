@@ -57,9 +57,10 @@ namespace Systems.Profile
             profile.age = Random.Range(18, 99);
             profile.distance = Random.Range(0f, 1000f);
 
+            var allImages = ScriptableObjectSearcher.AllProfileImages()
+                .Where(image => !image.shouldNotBeRandom);
             
-            var allTraits = ScriptableObjectSearcher.GetAllPersonalityTraits()
-                .ToArray();
+            var allTraits = ScriptableObjectSearcher.GetAllPersonalityTraits();
             var allTexts = ScriptableObjectSearcher.GetAllProfileTexts();
 
             var randomProfileTextTemplate = allTexts.RandomElement();
