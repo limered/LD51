@@ -2,6 +2,7 @@
 using System.Linq;
 using SystemBase.Core;
 using SystemBase.Utils;
+using Systems.Player.Events;
 using Systems.Profile;
 using Systems.Profile.Events;
 using UniRx;
@@ -47,11 +48,16 @@ namespace Systems.Player
             var profileTraits = msg.lastProfile.AllTraits();
             var foundPositive = wishList.wantPositives.FindAll(trait => profileTraits.Contains(trait.trait));
             var foundNegatives = wishList.wantNegatives.FindAll(trait => profileTraits.Contains(trait.trait));
+            
             foreach (var checkedTrait in foundPositive) checkedTrait.state = PersonalityCheckState.Checked;
-            // Check for Win
+            
+            if (wishList.wantPositives.All(trait => trait.state == PersonalityCheckState.Checked))
+                MessageBroker.Default.Publish(new WinMessage {profiles = wishList.likedProfiles});
 
             foreach (var checkedTrait in foundNegatives) checkedTrait.state = PersonalityCheckState.Checked;
-            // Check for Loss
+            
+            if (wishList.wantNegatives.All(trait => trait.state == PersonalityCheckState.Checked))
+                MessageBroker.Default.Publish(new LoseMessage {profiles = wishList.likedProfiles});
         }
     }
 }

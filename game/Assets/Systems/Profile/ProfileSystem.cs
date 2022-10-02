@@ -59,7 +59,14 @@ namespace Systems.Profile
                     .Publish(new ActiveProfileChangedEvent {lastProfile = profile});
             }
 
-            _profileConfig.activeProfile.Value = _profiles.Peek();
+            if (_profiles.Any())
+            {
+                _profileConfig.activeProfile.Value = _profiles.Peek();
+            }
+            else
+            {
+                // ToDo Forever Alone Image
+            }
         }
 
         public ProfileSo GenerateProfile(ProfileImage profileImage)
