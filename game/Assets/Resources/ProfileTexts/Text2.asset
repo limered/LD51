@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5163cd086bd84729955cdb84e662c2a4, type: 3}
   m_Name: Text2
   m_EditorClassIdentifier: 
-  template: I'm a total {Sport} nerd. Hoping to find love in this cruel world. Maybe
-    someone I can go to {Food} restaurants. And watch a {Movies} later ;)
+  template: "Do you like {Personality} people?\n\nThen I'm a perfect match :)\n\nI
+    spend my time mostly with {Sport}.\n\nOr in the theater watching {Movies} movies.\n\n
+    I am very dedicated to protect {Pets} and would give my life for them!"

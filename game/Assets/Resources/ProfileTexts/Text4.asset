@@ -9,9 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3fb4afc9d634b6eb05419344824d3b5, type: 3}
-  m_Name: swimming
+  m_Script: {fileID: 11500000, guid: 5163cd086bd84729955cdb84e662c2a4, type: 3}
+  m_Name: Text4
   m_EditorClassIdentifier: 
-  category: 2
-  text: swimming
-  propertyLocation: 0
+  template: 'My passion for {Food} takes me around the globe.
+
+
+    My next target
+    is {TravelLocation}. You wanna join the trip? ;)
+
+
+    We will get along if you
+    play {Sport} or {Sport}.'

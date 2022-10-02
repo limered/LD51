@@ -12,7 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5163cd086bd84729955cdb84e662c2a4, type: 3}
   m_Name: Text3
   m_EditorClassIdentifier: 
-  template: 'I''m new here, looking for the special person to complete my life. 
-    Like if you:  - love {Pets} - would take me to {TravelLocation} - attend {Religion}
-    meetings - can dance to {Music}  I am very {Personality}, just that you know...
-    hehe ;)'
+  template: 'I''m new here, looking for the special person to complete my life.
+
+    
+
+    Like
+    if you:
+
+    
+
+    - love {Pets}
+
+    - would take me to {TravelLocation}
+
+    -
+    attend {Religion} meetings
+
+    - can dance to {Music}
+
+    
+
+    I am very
+    {Personality}, just that you know... hehe ;)'

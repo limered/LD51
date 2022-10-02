@@ -9,6 +9,8 @@ namespace Systems.Profile.ScriptableObjects
     public class ProfileText : ScriptableObject
     {
         public Guid guid = new();
+        
+        [TextArea(30, 60)]
         public string template;
 
         /// <summary>
