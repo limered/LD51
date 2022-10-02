@@ -1,9 +1,9 @@
 ﻿using Systems.Properties;
 using UnityEngine;
 
-namespace Assets.Systems.Profile
+namespace Systems.Properties
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "LD51/Profile", fileName = "Profile", order = 0)]
     public class Profile : ScriptableObject
     {
         public Sprite avatar;

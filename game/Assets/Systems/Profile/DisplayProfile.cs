@@ -2,7 +2,7 @@
 {
     public class DisplayProfile
     {
-        public Profile Profile { get; set; }
+        public global::Systems.Properties.Profile Profile { get; set; }
         public Rating? Rating { get; set; }
     }
 }

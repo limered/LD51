@@ -52,9 +52,9 @@ namespace Assets.Systems.Profile
             ActiveProfile.Value = _profiles.Peek();
         }
 
-        public Profile GenerateProfile()
+        public global::Systems.Properties.Profile GenerateProfile()
         {
-            var profile = ScriptableObject.CreateInstance<Profile>();
+            var profile = ScriptableObject.CreateInstance<global::Systems.Properties.Profile>();
             profile.name = AmericanNameGenerator.GenerateName(AmericanNameGenerator.Gender.Neutral);
             profile.age = Random.Range(18, 99);
             profile.distance = Random.Range(0f, 1000f);
