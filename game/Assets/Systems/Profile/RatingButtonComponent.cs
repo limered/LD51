@@ -6,7 +6,7 @@ namespace Systems.Profile
     public class RatingButtonComponent : GameComponent
     {
         public Rating rating;
-        public ReactiveCommand<Rating> Command = new ReactiveCommand<Rating>();
+        public ReactiveCommand<Rating> Command = new();
 
         public void PressButton()
         {

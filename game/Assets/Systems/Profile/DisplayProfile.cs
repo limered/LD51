@@ -1,8 +1,10 @@
-﻿namespace Systems.Profile
+﻿using Systems.Profile.ScriptableObjects;
+
+namespace Systems.Profile
 {
     public class DisplayProfile
     {
-        public global::Systems.Profile.ScriptableObjects.Profile Profile { get; set; }
+        public ProfileSo Profile { get; set; }
         public Rating? Rating { get; set; }
     }
 }

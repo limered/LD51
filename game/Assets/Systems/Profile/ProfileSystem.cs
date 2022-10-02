@@ -3,6 +3,7 @@ using System.Linq;
 using Assets.Utils;
 using SystemBase.Core;
 using SystemBase.Utils;
+using Systems.Profile.ScriptableObjects;
 using UniRx;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -27,7 +28,7 @@ namespace Systems.Profile
                     profileSprites.Enqueue(profileSprites.Dequeue());
                     return profile;
                 })
-                .Concat(ScriptableObjectSearcher.GetAllInstances<global::Systems.Profile.ScriptableObjects.Profile>())
+                .Concat(ScriptableObjectSearcher.GetAllInstances<ProfileSo>())
                 .Select(p => new DisplayProfile { Profile = p, Rating = null })
                 .ToList();
 
@@ -49,9 +50,9 @@ namespace Systems.Profile
             ActiveProfile.Value = _profiles.Peek();
         }
 
-        public global::Systems.Profile.ScriptableObjects.Profile GenerateProfile()
+        public ProfileSo GenerateProfile()
         {
-            var profile = ScriptableObject.CreateInstance<global::Systems.Profile.ScriptableObjects.Profile>();
+            var profile = ScriptableObject.CreateInstance<ProfileSo>();
             profile.name = AmericanNameGenerator.GenerateName(AmericanNameGenerator.Gender.Neutral);
             profile.age = Random.Range(18, 99);
             profile.distance = Random.Range(0f, 1000f);
