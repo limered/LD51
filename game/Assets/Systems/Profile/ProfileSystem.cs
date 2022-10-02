@@ -16,6 +16,13 @@ namespace Systems.Profile
     {
         private Queue<DisplayProfile> _profiles;
         private ProfileConfigComponent _profileConfig;
+        private ProfileText[] _randomTexts;
+        private int _randomTextIndex = 0;
+
+        public ProfileSystem()
+        {
+            _randomTexts = ScriptableObjectSearcher.GetAllProfileTexts();
+        }
 
         public override void Register(ProfileConfigComponent component)
         {
@@ -78,9 +85,8 @@ namespace Systems.Profile
             profile.distance = Random.Range(0f, 1000f);
 
             var allTraits = ScriptableObjectSearcher.GetAllPersonalityTraits();
-            var allTexts = ScriptableObjectSearcher.GetAllProfileTexts();
 
-            var randomProfileTextTemplate = allTexts.RandomElement();
+            var randomProfileTextTemplate = GetRandomTextTemplate();
             var traits =
                 profileImage.traits.Concat(
                         randomProfileTextTemplate.Categories
@@ -96,6 +102,23 @@ namespace Systems.Profile
             profile.traits = traits;
 
             return profile;
+        }
+
+        private ProfileText GetRandomTextTemplate()
+        {
+            try
+            {
+                if (_randomTextIndex == 0)
+                {
+                    _randomTexts = _randomTexts.Randomize().ToArray();
+                }
+                
+                return _randomTexts[_randomTextIndex];
+            }
+            finally
+            {
+                _randomTextIndex = (_randomTextIndex + 1) % _randomTexts.Length;
+            }
         }
     }
 }
