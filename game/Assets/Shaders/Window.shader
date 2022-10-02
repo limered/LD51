@@ -56,7 +56,7 @@ Shader "Unlit/Window"
                 p += dot(p, p+34.345);
                 return frac(p.x*p.y);
             }
-            float3 Layer(float2 UV, float t)
+            float3 Layer(float2 UV, float t, float2 size)
             {
                 float2 aspect = float2(2, 1);
                 float2 uv = UV * _Size * aspect;
@@ -75,7 +75,7 @@ Shader "Unlit/Window"
                 y -= (gv.x-x) * (gv.x-x);
                 
                 float2 dropPos = (gv - float2(x, y))/aspect;
-                float drop = S(.05, .03, length(dropPos));
+                float drop = S(size.x, size.y, length(dropPos));
 
                 float2 trailPos = (gv - float2(x, t * .25))/aspect;
                 trailPos.y = (frac(trailPos.y * 8)-.5)/8;
@@ -93,10 +93,10 @@ Shader "Unlit/Window"
             {
                 float t = fmod(_Time.y + _T, 7200);
 
-                float3 drops = Layer(i.uv, t);
-                drops += Layer(i.uv * 1.23 + 7.54, t);
-                drops += Layer(i.uv * 1.35 + 1.54, t);
-                drops += Layer(i.uv * 1.57 - 7.54, t);
+                float3 drops = Layer(i.uv, t, float2(.05, .03));
+                drops += Layer(i.uv * 1.23 + 7.54, t, float2(.04, .02));
+                drops += Layer(i.uv * 1.35 + 1.54, t, float2(.06, .04));
+                drops += Layer(i.uv * 1.57 - 7.54, t, float2(.05, .03));
 
                 float blur = _Blur * 7 * (1 - drops.z);
                 float4 col = tex2Dlod(_MainTex, float4(i.uv + drops.xy * _Distortion, 0, blur));
