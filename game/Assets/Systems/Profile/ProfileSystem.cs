@@ -25,8 +25,6 @@ namespace Systems.Profile
                 .ToList()
                 .Randomize();
             
-            randomImages.Print(image => image.avatar.name);
-
             var randomProfiles = randomImages
                 .Select(GenerateProfile);
 
