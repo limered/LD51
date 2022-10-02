@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Systems.Properties
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "LD51/ProfileText", fileName = "ProfileText")]
     public class ProfileText : ScriptableObject
     {
         public Guid guid = new();

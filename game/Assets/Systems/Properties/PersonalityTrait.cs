@@ -23,7 +23,7 @@ namespace Systems.Properties
         Music,
     }
     
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "LD51/Trait", fileName = "PersonalityTrait")]
     public class PersonalityTrait  : ScriptableObject
     {
         public Guid guid = new();
