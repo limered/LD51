@@ -24,7 +24,7 @@ namespace Systems.Profile
                 .Where(image => !image.shouldNotBeRandom)
                 .ToList()
                 .Randomize();
-            
+
             var randomProfiles = randomImages
                 .Select(GenerateProfile);
 
