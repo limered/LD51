@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Assets.Utils;
 using SystemBase.Core;
@@ -13,8 +13,8 @@ namespace Systems.Profile
     [GameSystem]
     public class ProfileSystem : GameSystem<ProfileConfigComponent, RatingButtonComponent>
     {
-        public ReactiveProperty<DisplayProfile> ActiveProfile { get; } = new();
         private Queue<DisplayProfile> _profiles;
+        private ProfileConfigComponent _profileConfig;
 
         public override void Register(ProfileConfigComponent component)
         {
@@ -34,8 +34,7 @@ namespace Systems.Profile
 
             profiles = profiles.Randomize();
 
-            _profiles = new Queue<DisplayProfile>(profiles);
-            ActiveProfile.Value = _profiles.Peek();
+            component.activeProfile.Value = _profiles.Peek();
         }
 
         public override void Register(RatingButtonComponent component)
@@ -45,9 +44,10 @@ namespace Systems.Profile
 
         public void RateAndShowNext(Rating rating)
         {
-            ActiveProfile.Value.Rating = rating;
+            if (_profileConfig == null || _profiles == null) return;
+            _profileConfig.activeProfile.Value.Rating = rating;
             _profiles.Enqueue(_profiles.Dequeue());
-            ActiveProfile.Value = _profiles.Peek();
+            _profileConfig.activeProfile.Value = _profiles.Peek();
         }
 
         public ProfileSo GenerateProfile()
