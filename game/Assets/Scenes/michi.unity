@@ -174,6 +174,15 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 740063791, guid: 9d914cef451b25c47a979ad60515132b, type: 3}
+      propertyPath: m_text
+      value: "hfjksdfsdafdsaf\n\ndsafdsafdsa\nf ds fsda d sfa sdf ds fasd fds fds
+        fdsa ds fds fdsf dsfdsafdsfdfdsafdsa fds ds \n\ndsf sdf \ndsfds\nfdsafsda\nfsdaf\nsdafasdgfdghsdfghfgdhrteghtrbdg\nvdfgsdfgfdsg\nresgrewgregdfz\ngfdsfdsvred\ngre"
+      objectReference: {fileID: 0}
+    - target: {fileID: 740063791, guid: 9d914cef451b25c47a979ad60515132b, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1096812243, guid: 9d914cef451b25c47a979ad60515132b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -392,6 +401,41 @@ PrefabInstance:
     - target: {fileID: 3068982746451019590, guid: 9d914cef451b25c47a979ad60515132b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163567881259719468, guid: 9d914cef451b25c47a979ad60515132b,
+        type: 3}
+      propertyPath: EmissionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163567881259719468, guid: 9d914cef451b25c47a979ad60515132b,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163567881259719468, guid: 9d914cef451b25c47a979ad60515132b,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163567881259719468, guid: 9d914cef451b25c47a979ad60515132b,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528901864325370786, guid: 9d914cef451b25c47a979ad60515132b,
+        type: 3}
+      propertyPath: EmissionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528901864325370786, guid: 9d914cef451b25c47a979ad60515132b,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270518045175163870, guid: 9d914cef451b25c47a979ad60515132b,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4450968277022469122, guid: 9d914cef451b25c47a979ad60515132b,
