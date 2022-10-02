@@ -1,4 +1,7 @@
 ﻿using SystemBase.Core;
+using SystemBase.GameState.Messages;
+using SystemBase.GameState.States;
+using SystemBase.Utils;
 using Systems.Time.Events;
 using UniRx;
 
@@ -9,12 +12,20 @@ namespace Systems.Time
     {
         public override void Register(TimeComponent component)
         {
-            component.startTime = UnityEngine.Time.realtimeSinceStartup;
             SystemFixedUpdate(component).Subscribe(Tick).AddTo(component);
+            
+            MessageBroker.Default.Receive<GameMsgStart>()
+                .Subscribe(_ =>
+                {
+                    component.startTime = UnityEngine.Time.realtimeSinceStartup;
+                })
+                .AddTo(component);
         }
 
         private static void Tick(TimeComponent timer)
         {
+            if (IoC.Game.gameStateContext.CurrentState.Value.GetType() != typeof(Running)) return;
+            
             var endTime = timer.startTime + timer.tickDurationInSeconds;
             var time = UnityEngine.Time.realtimeSinceStartup;
             timer.progress.Value = (time - timer.startTime) / timer.tickDurationInSeconds;

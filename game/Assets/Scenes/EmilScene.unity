@@ -123,12 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &375297125 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3930820151863524467, guid: 9d914cef451b25c47a979ad60515132b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1918748870}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &577258618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -433,11 +427,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 282715936759468967, guid: 9d914cef451b25c47a979ad60515132b,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 221.70001
-      objectReference: {fileID: 0}
     - target: {fileID: 839526456441375795, guid: 9d914cef451b25c47a979ad60515132b,
         type: 3}
       propertyPath: m_Name
@@ -653,16 +642,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8272092997872901475, guid: 9d914cef451b25c47a979ad60515132b,
-        type: 3}
-      propertyPath: likeStamp
-      value: 
-      objectReference: {fileID: 375297125}
-    - target: {fileID: 8272092997872901475, guid: 9d914cef451b25c47a979ad60515132b,
-        type: 3}
-      propertyPath: nopeStamp
-      value: 
-      objectReference: {fileID: 2073337291}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d914cef451b25c47a979ad60515132b, type: 3}
 --- !u!1001 &1978560199
@@ -739,12 +718,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6dcce7ee5def08458209184f3ab38b2, type: 3}
---- !u!1 &2073337291 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5255544602484673578, guid: 9d914cef451b25c47a979ad60515132b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1918748870}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2109548296
 PrefabInstance:
   m_ObjectHideFlags: 0
