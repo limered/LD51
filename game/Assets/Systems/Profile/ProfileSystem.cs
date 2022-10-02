@@ -32,11 +32,11 @@ namespace Systems.Profile
                 .ToList().Randomize();
 
             _profiles = new Queue<DisplayProfile>(allProfiles
-                .Select(profile => new DisplayProfile {Profile = profile, Rating = null}));
+                .Select(profile => new DisplayProfile { Profile = profile, Rating = null }));
 
             component.activeProfile.Value = _profiles.Peek();
 
-            MessageBroker.Default.Publish(new ProfileQueueFilledEvent {queue = _profiles});
+            MessageBroker.Default.Publish(new ProfileQueueFilledEvent { queue = _profiles });
         }
 
         public override void Register(RatingButtonComponent component)
@@ -56,7 +56,7 @@ namespace Systems.Profile
             {
                 var profile = _profiles.Dequeue();
                 MessageBroker.Default
-                    .Publish(new ActiveProfileChangedEvent {lastProfile = profile});
+                    .Publish(new ActiveProfileChangedEvent { lastProfile = profile });
             }
 
             if (_profiles.Any())
@@ -81,12 +81,16 @@ namespace Systems.Profile
             var allTexts = ScriptableObjectSearcher.GetAllProfileTexts();
 
             var randomProfileTextTemplate = allTexts.RandomElement();
-            var traits = randomProfileTextTemplate.Categories
-                .Select(category => allTraits
-                    .Where(t => t.category == category)
-                    .ToArray()
-                    .RandomElement())
-                .ToArray();
+            var traits =
+                profileImage.traits.Concat(
+                        randomProfileTextTemplate.Categories
+                            .Select(category => allTraits
+                                .Where(t => t.category == category)
+                                .ToArray()
+                                .RandomElement())
+                    )
+                    .Where(x => x != null)
+                    .ToArray();
 
             profile.text = randomProfileTextTemplate.CreateText(traits, profile.name);
             profile.traits = traits;
