@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Systems.Properties;
+using Systems.Profile.ScriptableObjects;
 using UnityEngine;
 
 namespace Assets.Utils
@@ -19,6 +19,11 @@ namespace Assets.Utils
         public static ProfileText[] GetAllProfileTexts()
         {
             return GetAllInstances<ProfileText>();
+        }
+
+        public static ProfileImage[] AllProfileImages()
+        {
+            return GetAllInstances<ProfileImage>();
         }
     }
 }

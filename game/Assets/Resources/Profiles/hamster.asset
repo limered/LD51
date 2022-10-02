@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fba33c74226593e40841ca3e3c49c25b, type: 3}
+  m_Name: hamster
+  m_EditorClassIdentifier: 
+  profileImage: {fileID: 11400000, guid: 1025f0dbed94a4241bb3d729f589e34c, type: 2}
+  name: Hansel
+  text: '"So needless to say
+
+    I''m odds and ends
+
+    But I''ll be stumbling
+    away
+
+    Slowly learning that life is okay
+
+    Say after me
+
+    It''s no
+    better to be safe than sorry
+
+
+    Take on me, take on me,
+
+    Take me on,
+    take on me,
+
+    I''ll be gone
+
+    In a day or two"
+
+
+    Hansel here.
+
+
+    I
+    love cleaning dust and listen to music!
+
+
+'
+  age: 3
+  distance: 1
+  traits:
+  - {fileID: 11400000, guid: 72d6803c1cb83eb4e933e6f01ded7e95, type: 2}
+  - {fileID: 11400000, guid: bdfc801551e5a864f9c857e50fa1bfdc, type: 2}

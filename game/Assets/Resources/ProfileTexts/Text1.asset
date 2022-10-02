@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5163cd086bd84729955cdb84e662c2a4, type: 3}
   m_Name: Text1
   m_EditorClassIdentifier: 
-  template: Hello, my name is {Name}. I love {Pets}. My favourite food is {Food}.
-    Searching for a partner with {Degree} {Personality},  who would take me to a
-    trip to {TravelLocation} or {TravelLocation}.
+  template: "Hello, my name is {Name}. \n\nI love {Pets}. \nMy favourite food is
+    {Food}. \n\nSearching for a partner with {Personality} personality,  \nwho would
+    take me to a trip to {TravelLocation} or {TravelLocation}."

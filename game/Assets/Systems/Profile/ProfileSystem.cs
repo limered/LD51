@@ -1,43 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Assets.Utils;
 using SystemBase.Core;
 using SystemBase.Utils;
-using Systems.Properties;
+using Systems.Profile.Events;
+using Systems.Profile.ScriptableObjects;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace Assets.Systems.Profile
+namespace Systems.Profile
 {
     [GameSystem]
     public class ProfileSystem : GameSystem<ProfileConfigComponent, RatingButtonComponent>
     {
-        public ReactiveProperty<DisplayProfile> ActiveProfile { get; } = new();
         private Queue<DisplayProfile> _profiles;
+        private ProfileConfigComponent _profileConfig;
+        private ProfileText[] _randomTexts;
+        private int _randomTextIndex = 0;
+
+        public ProfileSystem()
+        {
+            _randomTexts = ScriptableObjectSearcher.GetAllProfileTexts();
+        }
 
         public override void Register(ProfileConfigComponent component)
         {
-            var profileSprites = new Queue<Sprite>(component.profileSprites.ToList().Randomize());
+            _profileConfig = component;
 
-            var profiles = Enumerable.Range(0, component.randomProfiles)
-                .Select(_ =>
-                {
-                    var profile = GenerateProfile();
-                    profile.avatar = profileSprites.Peek();
-                    profileSprites.Enqueue(profileSprites.Dequeue());
-                    return profile;
-                })
-                .Concat(ScriptableObjectSearcher.GetAllInstances<Profile>())
-                .Select(p => new DisplayProfile { Profile = p, Rating = null })
-                .ToList();
+            var randomImages = ScriptableObjectSearcher.AllProfileImages()
+                .Where(image => !image.shouldNotBeRandom);
 
-            profiles = profiles.Randomize();
+            var randomProfiles = randomImages
+                .Select(GenerateProfile);
 
-            _profiles = new Queue<DisplayProfile>(profiles);
-            ActiveProfile.Value = _profiles.Peek();
+            var allProfiles = randomProfiles
+                .Concat(ScriptableObjectSearcher.GetAllInstances<ProfileSo>())
+                .ToList().Randomize();
+
+            _profiles = new Queue<DisplayProfile>(allProfiles
+                .Select(profile => new DisplayProfile { Profile = profile, Rating = null }));
+
+            component.activeProfile.Value = _profiles.Peek();
+
+            MessageBroker.Default.Publish(new ProfileQueueFilledEvent { queue = _profiles });
         }
 
         public override void Register(RatingButtonComponent component)
@@ -47,35 +53,72 @@ namespace Assets.Systems.Profile
 
         public void RateAndShowNext(Rating rating)
         {
-            ActiveProfile.Value.Rating = rating;
-            _profiles.Enqueue(_profiles.Dequeue());
-            ActiveProfile.Value = _profiles.Peek();
+            if (_profileConfig == null || _profiles == null) return;
+            _profileConfig.activeProfile.Value.Rating = rating;
+            if (rating == Rating.Dislike)
+            {
+                _profiles.Enqueue(_profiles.Dequeue());
+            }
+            else
+            {
+                var profile = _profiles.Dequeue();
+                MessageBroker.Default
+                    .Publish(new ActiveProfileChangedEvent { lastProfile = profile });
+            }
+
+            if (_profiles.Any())
+            {
+                _profileConfig.activeProfile.Value = _profiles.Peek();
+            }
+            else
+            {
+                // ToDo Forever Alone Image
+            }
         }
 
-        public Profile GenerateProfile()
+        public ProfileSo GenerateProfile(ProfileImage profileImage)
         {
-            var profile = ScriptableObject.CreateInstance<Profile>();
+            var profile = ScriptableObject.CreateInstance<ProfileSo>();
+            profile.profileImage = profileImage;
             profile.name = AmericanNameGenerator.GenerateName(AmericanNameGenerator.Gender.Neutral);
             profile.age = Random.Range(18, 99);
             profile.distance = Random.Range(0f, 1000f);
 
-            
-            var allTraits = ScriptableObjectSearcher.GetAllPersonalityTraits()
-                .ToArray();
-            var allTexts = ScriptableObjectSearcher.GetAllProfileTexts();
+            var allTraits = ScriptableObjectSearcher.GetAllPersonalityTraits();
 
-            var randomProfileTextTemplate = allTexts.RandomElement();
-            var traits = randomProfileTextTemplate.Categories
-                .Select(category => allTraits
-                    .Where(t => t.category == category)
-                    .ToArray()
-                    .RandomElement())
-                .ToArray();
+            var randomProfileTextTemplate = GetRandomTextTemplate();
+            var traits =
+                profileImage.traits.Concat(
+                        randomProfileTextTemplate.Categories
+                            .Select(category => allTraits
+                                .Where(t => t.category == category)
+                                .ToArray()
+                                .RandomElement())
+                    )
+                    .Where(x => x != null)
+                    .ToArray();
 
             profile.text = randomProfileTextTemplate.CreateText(traits, profile.name);
             profile.traits = traits;
 
             return profile;
+        }
+
+        private ProfileText GetRandomTextTemplate()
+        {
+            try
+            {
+                if (_randomTextIndex == 0)
+                {
+                    _randomTexts = _randomTexts.Randomize().ToArray();
+                }
+                
+                return _randomTexts[_randomTextIndex];
+            }
+            finally
+            {
+                _randomTextIndex = (_randomTextIndex + 1) % _randomTexts.Length;
+            }
         }
     }
 }

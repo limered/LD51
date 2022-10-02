@@ -1,9 +1,8 @@
-﻿using System;
-using SystemBase.Core;
+﻿using SystemBase.Core;
 using TMPro;
 using UnityEngine.UI;
 
-namespace Assets.Systems.Profile
+namespace Systems.Profile
 {
     public class ProfileUIConfigComponent : GameComponent
     {

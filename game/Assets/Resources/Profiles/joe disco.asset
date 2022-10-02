@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba33c74226593e40841ca3e3c49c25b, type: 3}
   m_Name: joe disco
   m_EditorClassIdentifier: 
-  avatar: {fileID: 21300000, guid: 86102c14ebefebf45ac73fb0ab35cc6f, type: 3}
+  profileImage: {fileID: 11400000, guid: 0354384caf6d94242875ed473db1481f, type: 2}
   name: Joe Disco
-  text: Hey Boys and Girls. I really like to party and dance all night! Funk music
-    is my jam!
+  text: "Hey there Boys and Girls! \nI really like to party and dance all night!
+    \n\nFunk music is my jam!"
   age: 28
   distance: 12
   traits:
