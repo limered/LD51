@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Text1
   m_EditorClassIdentifier: 
   template: "Hello, my name is {Name}. \n\nI love {Pets}. \nMy favourite food is
-    {Food}. \n\nSearching for a partner with {Personality},  \nwho would take me
-    to a trip to {TravelLocation} or {TravelLocation}."
+    {Food}. \n\nSearching for a partner with {Personality} personality,  \nwho would
+    take me to a trip to {TravelLocation} or {TravelLocation}."
