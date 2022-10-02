@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SystemBase.Core;
 using Systems.Profile;
 using Systems.Profile.ScriptableObjects;
+using UniRx;
 using UnityEngine;
 
 namespace Systems.Player
@@ -15,6 +16,8 @@ namespace Systems.Player
         public List<CheckedTrait> wantPositives;
         public List<CheckedTrait> wantNegatives;
         public List<DisplayProfile> likedProfiles;
+
+        public ReactiveCommand listsChanged = new();
     }
 
     public enum PersonalityCheckState
