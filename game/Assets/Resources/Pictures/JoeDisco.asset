@@ -16,3 +16,4 @@ MonoBehaviour:
   traits:
   - {fileID: 11400000, guid: 33a0af86fd5c8154b86a9084cb60384c, type: 2}
   - {fileID: 11400000, guid: 2102fe7f33bf71b4db9627b5fd696b79, type: 2}
+  shouldNotBeRandom: 1

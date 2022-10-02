@@ -7,5 +7,6 @@ namespace Systems.Profile.ScriptableObjects
     {
         public Sprite avatar;
         public PersonalityTrait[] traits;
+        public bool shouldNotBeRandom;
     }
 }
