@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 627871209551795111}
   - component: {fileID: 627871209551795108}
   - component: {fileID: 286322327}
+  - component: {fileID: 1020032822024706890}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -63,3 +64,22 @@ MonoBehaviour:
   startTime: 0
   progress:
     value: 1
+--- !u!114 &1020032822024706890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627871209551795109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5367fec536264ed9bf4199c4e595843b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomProfiles: 5
+  profileSprites:
+  - {fileID: 21300000, guid: c46df6b22aefe4a43ac2703f5ee87f80, type: 3}
+  - {fileID: 21300000, guid: fb5582eb3daca734a9f5b5ee29468a1a, type: 3}
+  - {fileID: 21300000, guid: 074018e3dc706334194408c00dd0b718, type: 3}
+  - {fileID: 21300000, guid: 1d554150b1c70f144b9358b0a770bd07, type: 3}
+  - {fileID: 21300000, guid: 18449c5a178b8e74288e2eae093aec1f, type: 3}
