@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: grandma
   m_EditorClassIdentifier: 
   avatar: {fileID: 21300000, guid: c995e843af9a6e94c9f7c8c4078afff7, type: 3}
-  traits: []
+  traits:
+  - {fileID: 11400000, guid: c0c0ee43db4d00547ad2eac8ce24ec9a, type: 2}
+  shouldNotBeRandom: 0
