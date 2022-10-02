@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Systems.Properties;
+using UnityEngine;
 
 namespace Assets.Systems.Profile
 {
@@ -10,5 +11,6 @@ namespace Assets.Systems.Profile
         public string text;
         public int age;
         public float distance;
+        public PersonalityTrait[] traits;
     }
 }

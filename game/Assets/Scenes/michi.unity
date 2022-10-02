@@ -448,6 +448,7 @@ GameObject:
   - component: {fileID: 619056896}
   - component: {fileID: 619056895}
   - component: {fileID: 619056897}
+  - component: {fileID: 619056898}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -500,6 +501,25 @@ MonoBehaviour:
   startTime: 0
   progress:
     value: 1
+--- !u!114 &619056898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619056894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5367fec536264ed9bf4199c4e595843b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomProfiles: 5
+  profileSprites:
+  - {fileID: 21300000, guid: c46df6b22aefe4a43ac2703f5ee87f80, type: 3}
+  - {fileID: 21300000, guid: fb5582eb3daca734a9f5b5ee29468a1a, type: 3}
+  - {fileID: 21300000, guid: 074018e3dc706334194408c00dd0b718, type: 3}
+  - {fileID: 21300000, guid: 1d554150b1c70f144b9358b0a770bd07, type: 3}
+  - {fileID: 21300000, guid: 18449c5a178b8e74288e2eae093aec1f, type: 3}
 --- !u!114 &733345020 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8272092997872901475, guid: 9d914cef451b25c47a979ad60515132b,
@@ -716,7 +736,7 @@ PrefabInstance:
     - target: {fileID: 3361535860707225882, guid: 9d914cef451b25c47a979ad60515132b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3361535860707225882, guid: 9d914cef451b25c47a979ad60515132b,
         type: 3}
@@ -776,7 +796,7 @@ PrefabInstance:
     - target: {fileID: 5590844889371053874, guid: 9d914cef451b25c47a979ad60515132b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5590844889371053874, guid: 9d914cef451b25c47a979ad60515132b,
         type: 3}

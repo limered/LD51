@@ -40,7 +40,7 @@ namespace Systems.Properties
             }
         }
 
-        public string CreateText(IEnumerable<PersonalityTrait> traits)
+        public string CreateText(IEnumerable<PersonalityTrait> traits, string name)
         {
             var dict = new Dictionary<Category, List<string>>();
             foreach (var trait in traits)
@@ -60,6 +60,14 @@ namespace Systems.Properties
             {
                 if (template[i] == '{')
                 {
+                    if (template.Substring(i).StartsWith("{Name}"))
+                    {
+                        i += "{Name}".Length - 1;
+                        text += name;
+                        continue;
+                    }
+
+
                     foreach (var category in dict.Keys)
                     {
                         if (template.Substring(i).StartsWith($"{{{category}}}"))
