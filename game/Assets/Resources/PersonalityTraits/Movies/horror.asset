@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fb4afc9d634b6eb05419344824d3b5, type: 3}
   m_Name: horror
   m_EditorClassIdentifier: 
-  category: 0
-  text: 
+  category: 10
+  text: horror
   propertyLocation: 0

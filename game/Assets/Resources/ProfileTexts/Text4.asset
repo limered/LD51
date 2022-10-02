@@ -14,10 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   template: 'My passion for {Food} takes me around the globe.
 
-
     My next target
     is {TravelLocation}. You wanna join the trip? ;)
-
 
     We will get along if you
     play {Sport} or {Sport}.'

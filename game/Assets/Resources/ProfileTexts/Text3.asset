@@ -14,23 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   template: 'I''m new here, looking for the special person to complete my life.
 
-    
 
     Like
     if you:
-
-    
 
     - love {Pets}
 
     - would take me to {TravelLocation}
 
-    -
-    attend {Religion} meetings
+    - attend
+    {Religion} meetings
 
     - can dance to {Music}
 
-    
 
-    I am very
-    {Personality}, just that you know... hehe ;)'
+    I am very {Personality},
+    just that you know... hehe ;)'
