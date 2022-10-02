@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3fb4afc9d634b6eb05419344824d3b5, type: 3}
-  m_Name: lemonade
+  m_Script: {fileID: 11500000, guid: 009057bbc0a14ee9b334e740c013f200, type: 3}
+  m_Name: aquarium girl
   m_EditorClassIdentifier: 
-  category: 0
-  text: lemonade
-  propertyLocation: 1
+  avatar: {fileID: 21300000, guid: c954c70515d54b04580b2a8df9b81b51, type: 3}
+  traits:
+  - {fileID: 11400000, guid: e2478a0ae98363f4e9be703de0f3447f, type: 2}
+  shouldNotBeRandom: 0

@@ -38,6 +38,8 @@ namespace Systems.Player
             wishList.wantNegatives = allTraits.GetRange(positivesCount + 1, negativesCount)
                 .Select(trait => new CheckedTrait {trait = trait, state = PersonalityCheckState.Unchecked})
                 .ToList();
+
+            wishList.listsChanged.Execute();
         }
 
         private void SaveLikedProfiles(ActiveProfileChangedEvent msg, WishlistComponent wishList)
