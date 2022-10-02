@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fb4afc9d634b6eb05419344824d3b5, type: 3}
   m_Name: football
   m_EditorClassIdentifier: 
-  name: 
+  category: 2
   text: 
   propertyLocation: 0
