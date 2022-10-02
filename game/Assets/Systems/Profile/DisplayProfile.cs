@@ -7,7 +7,7 @@ namespace Systems.Profile
     public class DisplayProfile
     {
         public ProfileSo Profile { get; set; }
-        public Rating? Rating { get; set; }
+        public Rating Rating { get; set; } = Rating.Dislike;
 
         public IEnumerable<PersonalityTrait> AllTraits()
         {

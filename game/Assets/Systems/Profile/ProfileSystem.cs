@@ -5,6 +5,7 @@ using SystemBase.Core;
 using SystemBase.Utils;
 using Systems.Profile.Events;
 using Systems.Profile.ScriptableObjects;
+using Systems.Time.Events;
 using UniRx;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -39,22 +40,57 @@ namespace Systems.Profile
                 .ToList().Randomize();
 
             _profiles = new Queue<DisplayProfile>(allProfiles
-                .Select(profile => new DisplayProfile { Profile = profile, Rating = null }));
+                .Select(profile => new DisplayProfile {Profile = profile, Rating = Rating.Dislike}));
 
             component.activeProfile.Value = _profiles.Peek();
 
-            MessageBroker.Default.Publish(new ProfileQueueFilledEvent { queue = _profiles });
+            MessageBroker.Default.Publish(new ProfileQueueFilledEvent {queue = _profiles});
+
+            MessageBroker.Default.Receive<TickEvent>().Subscribe(_ => ShowNext(component)).AddTo(component);
         }
 
         public override void Register(RatingButtonComponent component)
         {
             component.Command.Subscribe(RateAndShowNext).AddTo(component);
+
+            MessageBroker.Default.Receive<TickEvent>().Subscribe(_ =>
+            {
+                component.likeStamp.SetActive(false);
+                component.nopeStamp.SetActive(false);
+            }).AddTo(component);
         }
 
-        public void RateAndShowNext(Rating rating)
+        private void ShowNext(ProfileConfigComponent profileConfigComponent)
+        {
+            if (profileConfigComponent.debugSwitchProfiles || !_profiles.Any()) return;
+
+            var rating = profileConfigComponent.activeProfile.Value.Rating;
+            SwitchToNextProfile(rating);
+        }
+
+        private void RateAndShowNext(RatingButtonComponent ratingComponent)
         {
             if (_profileConfig == null || _profiles == null) return;
-            _profileConfig.activeProfile.Value.Rating = rating;
+            _profileConfig.activeProfile.Value.Rating = ratingComponent.rating;
+
+            if (ratingComponent.rating == Rating.Like)
+            {
+                ratingComponent.likeStamp.SetActive(true);
+                ratingComponent.nopeStamp.SetActive(false);
+            }
+            else
+            {
+                ratingComponent.likeStamp.SetActive(false);
+                ratingComponent.nopeStamp.SetActive(true);
+            }
+
+            if (!_profileConfig.debugSwitchProfiles || !_profiles.Any()) return;
+            SwitchToNextProfile(ratingComponent.rating);
+        }
+
+
+        private void SwitchToNextProfile(Rating rating)
+        {
             if (rating == Rating.Dislike)
             {
                 _profiles.Enqueue(_profiles.Dequeue());
@@ -63,7 +99,7 @@ namespace Systems.Profile
             {
                 var profile = _profiles.Dequeue();
                 MessageBroker.Default
-                    .Publish(new ActiveProfileChangedEvent { lastProfile = profile });
+                    .Publish(new ActiveProfileChangedEvent {lastProfile = profile});
             }
 
             if (_profiles.Any())
@@ -76,7 +112,7 @@ namespace Systems.Profile
             }
         }
 
-        public ProfileSo GenerateProfile(ProfileImage profileImage)
+        private ProfileSo GenerateProfile(ProfileImage profileImage)
         {
             var profile = ScriptableObject.CreateInstance<ProfileSo>();
             profile.profileImage = profileImage;
@@ -108,11 +144,8 @@ namespace Systems.Profile
         {
             try
             {
-                if (_randomTextIndex == 0)
-                {
-                    _randomTexts = _randomTexts.Randomize().ToArray();
-                }
-                
+                if (_randomTextIndex == 0) _randomTexts = _randomTexts.Randomize().ToArray();
+
                 return _randomTexts[_randomTextIndex];
             }
             finally

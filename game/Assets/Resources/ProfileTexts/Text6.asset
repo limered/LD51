@@ -12,12 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5163cd086bd84729955cdb84e662c2a4, type: 3}
   m_Name: Text6
   m_EditorClassIdentifier: 
-  template: 'Hey, listen to me: I am your new dreampartner. I LOOOVE {Food} and {Pets}.
+  template: 'Hey, listen to me: I am your new dreampartner!
+
+
+    I LOOOVE {Food}
+    and {Pets}.
+
+
+    You need to play {Sport} with me and watch me when i''m {Hobby}.
 
     You
-    need to play {Sport} with me and watch me when i''m {Hobby}.
+    will love me, even if i''m {Shape}.
 
-    You will love
-    me, even if i''m {Shape}.
 
     Give me a Like!'

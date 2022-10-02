@@ -38,6 +38,8 @@ namespace Systems.Player
             wishList.wantNegatives = allTraits.GetRange(positivesCount + 1, negativesCount)
                 .Select(trait => new CheckedTrait {trait = trait, state = PersonalityCheckState.Unchecked})
                 .ToList();
+
+            wishList.listsChanged.Execute();
         }
 
         private void SaveLikedProfiles(ActiveProfileChangedEvent msg, WishlistComponent wishList)
@@ -50,11 +52,13 @@ namespace Systems.Player
             var foundNegatives = wishList.wantNegatives.FindAll(trait => profileTraits.Contains(trait.trait));
             
             foreach (var checkedTrait in foundPositive) checkedTrait.state = PersonalityCheckState.Checked;
+
+            foreach (var checkedTrait in foundNegatives) checkedTrait.state = PersonalityCheckState.Checked;
+
+            wishList.listsChanged.Execute();
             
             if (wishList.wantPositives.All(trait => trait.state == PersonalityCheckState.Checked))
                 MessageBroker.Default.Publish(new WinMessage {profiles = wishList.likedProfiles});
-
-            foreach (var checkedTrait in foundNegatives) checkedTrait.state = PersonalityCheckState.Checked;
             
             if (wishList.wantNegatives.All(trait => trait.state == PersonalityCheckState.Checked))
                 MessageBroker.Default.Publish(new LoseMessage {profiles = wishList.likedProfiles});
