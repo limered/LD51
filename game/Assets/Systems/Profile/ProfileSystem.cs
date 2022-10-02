@@ -5,6 +5,7 @@ using SystemBase.Core;
 using SystemBase.Utils;
 using Systems.Profile.Events;
 using Systems.Profile.ScriptableObjects;
+using Systems.Time.Events;
 using UniRx;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -39,11 +40,39 @@ namespace Systems.Profile
                 .ToList().Randomize();
 
             _profiles = new Queue<DisplayProfile>(allProfiles
-                .Select(profile => new DisplayProfile { Profile = profile, Rating = null }));
+                .Select(profile => new DisplayProfile {Profile = profile, Rating = null}));
 
             component.activeProfile.Value = _profiles.Peek();
 
-            MessageBroker.Default.Publish(new ProfileQueueFilledEvent { queue = _profiles });
+            MessageBroker.Default.Publish(new ProfileQueueFilledEvent {queue = _profiles});
+
+            MessageBroker.Default.Receive<TickEvent>().Subscribe(_ => ShowNext(component)).AddTo(component);
+        }
+
+        private void ShowNext(ProfileConfigComponent profileConfigComponent)
+        {
+            if (profileConfigComponent.debugSwitchProfiles || !_profiles.Any()) return;
+
+            var rating = profileConfigComponent.activeProfile.Value.Rating;
+            if (rating == Rating.Dislike)
+            {
+                _profiles.Enqueue(_profiles.Dequeue());
+            }
+            else
+            {
+                var profile = _profiles.Dequeue();
+                MessageBroker.Default
+                    .Publish(new ActiveProfileChangedEvent {lastProfile = profile});
+            }
+
+            if (_profiles.Any())
+            {
+                _profileConfig.activeProfile.Value = _profiles.Peek();
+            }
+            else
+            {
+                // ToDo Forever Alone Image
+            }
         }
 
         public override void Register(RatingButtonComponent component)
@@ -55,6 +84,9 @@ namespace Systems.Profile
         {
             if (_profileConfig == null || _profiles == null) return;
             _profileConfig.activeProfile.Value.Rating = rating;
+
+            if (!_profileConfig.debugSwitchProfiles || !_profiles.Any()) return;
+
             if (rating == Rating.Dislike)
             {
                 _profiles.Enqueue(_profiles.Dequeue());
@@ -63,7 +95,7 @@ namespace Systems.Profile
             {
                 var profile = _profiles.Dequeue();
                 MessageBroker.Default
-                    .Publish(new ActiveProfileChangedEvent { lastProfile = profile });
+                    .Publish(new ActiveProfileChangedEvent {lastProfile = profile});
             }
 
             if (_profiles.Any())
@@ -108,11 +140,8 @@ namespace Systems.Profile
         {
             try
             {
-                if (_randomTextIndex == 0)
-                {
-                    _randomTexts = _randomTexts.Randomize().ToArray();
-                }
-                
+                if (_randomTextIndex == 0) _randomTexts = _randomTexts.Randomize().ToArray();
+
                 return _randomTexts[_randomTextIndex];
             }
             finally
