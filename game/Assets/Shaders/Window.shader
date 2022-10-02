@@ -91,12 +91,12 @@ Shader "Unlit/Window"
             }
             fixed4 frag (v2f i) : SV_Target
             {
-                float t = fmod(_Time.y + _T, 7200);
+                float t = fmod(_Time.y * 0.3 + _T, 7200);
 
                 float3 drops = Layer(i.uv, t, float2(.05, .03));
-                drops += Layer(i.uv * 1.23 + 7.54, t, float2(.04, .02));
-                drops += Layer(i.uv * 1.35 + 1.54, t, float2(.06, .04));
-                drops += Layer(i.uv * 1.57 - 7.54, t, float2(.05, .03));
+                drops += Layer(i.uv * 1.23 + 7.54, t * 1.1, float2(.04, .02));
+                drops += Layer(i.uv * 1.35 + 1.54, t * 0.9, float2(.06, .04));
+                drops += Layer(i.uv * 1.57 - 7.54, t * 1.5, float2(.05, .03));
 
                 float blur = _Blur * 7 * (1 - drops.z);
                 float4 col = tex2Dlod(_MainTex, float4(i.uv + drops.xy * _Distortion, 0, blur));
