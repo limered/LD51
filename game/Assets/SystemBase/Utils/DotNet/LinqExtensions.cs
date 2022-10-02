@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace SystemBase.Utils
@@ -10,7 +12,7 @@ namespace SystemBase.Utils
         {
             return coll.OrderBy(x => x).Skip(n - 1).FirstOrDefault();
         }
-
+        
         public static List<T> Randomize<T>(this List<T> list)
         {
             var result = new List<T>(list.Count);
@@ -32,6 +34,22 @@ namespace SystemBase.Utils
             }
 
             return coll.Concat(result);
+        }
+
+        public static void Print<T>(this IEnumerable<T> list)
+        {
+            foreach (var element in list)
+            {
+                Debug.Log(element);
+            }
+        }
+        
+        public static void Print<T>(this IEnumerable<T> list, Func<T, string> returnStringToPrint)
+        {
+            foreach (var element in list)
+            {
+                Debug.Log(returnStringToPrint(element));
+            }
         }
     }
 }
