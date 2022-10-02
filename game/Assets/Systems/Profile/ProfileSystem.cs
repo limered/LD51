@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Assets.Utils;
 using SystemBase.Core;
@@ -18,22 +18,24 @@ namespace Systems.Profile
 
         public override void Register(ProfileConfigComponent component)
         {
-            var profileSprites = new Queue<Sprite>(component.profileSprites.ToList().Randomize());
+            _profileConfig = component;
+            
+            var randomImages = ScriptableObjectSearcher.AllProfileImages()
+                .Where(image => !image.shouldNotBeRandom)
+                .ToList()
+                .Randomize();
+            
+            randomImages.Print(image => image.avatar.name);
 
-            var profiles = Enumerable.Range(0, component.randomProfiles)
-                .Select(_ =>
-                {
-                    var profile = GenerateProfile();
-                    profile.avatar = profileSprites.Peek();
-                    profileSprites.Enqueue(profileSprites.Dequeue());
-                    return profile;
-                })
-                .Concat(ScriptableObjectSearcher.GetAllInstances<ProfileSo>())
-                .Select(p => new DisplayProfile { Profile = p, Rating = null })
-                .ToList();
+            var randomProfiles = randomImages
+                .Select(GenerateProfile);
 
-            profiles = profiles.Randomize();
+            var allProfiles = randomProfiles
+                .Concat(ScriptableObjectSearcher.GetAllInstances<ProfileSo>());
 
+            _profiles = new Queue<DisplayProfile>(allProfiles
+                .Select(profile => new DisplayProfile {Profile = profile, Rating = null}));
+            
             component.activeProfile.Value = _profiles.Peek();
         }
 
@@ -50,15 +52,13 @@ namespace Systems.Profile
             _profileConfig.activeProfile.Value = _profiles.Peek();
         }
 
-        public ProfileSo GenerateProfile()
+        public ProfileSo GenerateProfile(ProfileImage profileImage)
         {
             var profile = ScriptableObject.CreateInstance<ProfileSo>();
+            profile.profileImage = profileImage;
             profile.name = AmericanNameGenerator.GenerateName(AmericanNameGenerator.Gender.Neutral);
             profile.age = Random.Range(18, 99);
             profile.distance = Random.Range(0f, 1000f);
-
-            var allImages = ScriptableObjectSearcher.AllProfileImages()
-                .Where(image => !image.shouldNotBeRandom);
             
             var allTraits = ScriptableObjectSearcher.GetAllPersonalityTraits();
             var allTexts = ScriptableObjectSearcher.GetAllProfileTexts();
