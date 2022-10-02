@@ -40,7 +40,7 @@ namespace Systems.Profile
                 .ToList().Randomize();
 
             _profiles = new Queue<DisplayProfile>(allProfiles
-                .Select(profile => new DisplayProfile {Profile = profile, Rating = null}));
+                .Select(profile => new DisplayProfile {Profile = profile, Rating = Rating.Dislike}));
 
             component.activeProfile.Value = _profiles.Peek();
 
@@ -52,13 +52,12 @@ namespace Systems.Profile
         public override void Register(RatingButtonComponent component)
         {
             component.Command.Subscribe(RateAndShowNext).AddTo(component);
-            
+
             MessageBroker.Default.Receive<TickEvent>().Subscribe(_ =>
             {
                 component.likeStamp.SetActive(false);
                 component.nopeStamp.SetActive(false);
             }).AddTo(component);
-
         }
 
         private void ShowNext(ProfileConfigComponent profileConfigComponent)
