@@ -2276,6 +2276,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rating: 0
+  likeStamp: {fileID: 3930820151863524467}
+  nopeStamp: {fileID: 5255544602484673578}
 --- !u!1 &6887366269585033025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,8 +2381,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
-  likeStamp: {fileID: 3930820151863524467}
-  nopeStamp: {fileID: 5255544602484673578}
 --- !u!1 &6937201733250839665
 GameObject:
   m_ObjectHideFlags: 0
