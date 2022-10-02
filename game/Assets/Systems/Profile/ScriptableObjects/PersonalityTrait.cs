@@ -11,16 +11,17 @@ namespace Systems.Profile.ScriptableObjects
 
     public enum Category
     {
-        Food,
-        Pets,
-        Sport,
-        Hobby,
-        TravelLocation,
-        Shape,
-        Relation,
-        Religion,
-        Personality,
-        Music,
+        Food = 0,
+        Pets = 1,
+        Sport = 2,
+        Hobby = 3,
+        TravelLocation = 4,
+        Shape = 5,
+        Relation = 6,
+        Religion = 7,
+        Personality = 8,
+        Music = 9,
+        Movies = 10,
     }
     
     [CreateAssetMenu(menuName = "LD51/Trait", fileName = "PersonalityTrait")]
