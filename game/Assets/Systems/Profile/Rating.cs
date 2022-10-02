@@ -2,6 +2,6 @@
 {
     public enum Rating
     {
-        Dislike, Like
+        Like, Dislike
     }
 }

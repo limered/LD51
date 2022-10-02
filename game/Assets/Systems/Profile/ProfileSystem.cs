@@ -89,7 +89,7 @@ namespace Systems.Profile
         }
 
 
-        private void SwitchToNextProfile(Rating? rating)
+        private void SwitchToNextProfile(Rating rating)
         {
             if (rating == Rating.Dislike)
             {
