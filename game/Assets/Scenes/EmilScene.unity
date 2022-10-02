@@ -354,7 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c8e6ac9bc84fe0aa9f317a755be39e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wantPositivesMinMax: {x: 3, y: 7}
+  wantPositivesMinMax: {x: 3, y: 3}
   wantNegativeMinMax: {x: 3, y: 3}
   wantPositives: []
   wantNegatives: []
