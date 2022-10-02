@@ -1,6 +1,7 @@
 ﻿using SystemBase.Core;
 using SystemBase.Utils;
 using UniRx;
+using UnityEngine;
 
 namespace Systems.Profile
 {
@@ -30,6 +31,14 @@ namespace Systems.Profile
             profileUIConfigDisplaySystem.ageTextElement.text = $"{newProfile.Profile.age} years";
             profileUIConfigDisplaySystem.distanceTextElement.text = $"{newProfile.Profile.distance:F1} miles away";
             profileUIConfigDisplaySystem.bioTextElement.text = newProfile.Profile.text;
+            ResetScrollPosition(profileUIConfigDisplaySystem);
+        }
+
+        private static void ResetScrollPosition(ProfileUIConfigComponent component)
+        {
+            var rectTransform = component.bioTextElement.GetComponent<RectTransform>();
+            var position = rectTransform.position;
+            rectTransform.position = new Vector3(position.x, 0, position.z);
         }
 
         public override void Register(ProfileConfigComponent component)
