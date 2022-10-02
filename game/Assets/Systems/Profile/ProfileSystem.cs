@@ -52,6 +52,13 @@ namespace Systems.Profile
         public override void Register(RatingButtonComponent component)
         {
             component.Command.Subscribe(RateAndShowNext).AddTo(component);
+            
+            MessageBroker.Default.Receive<TickEvent>().Subscribe(_ =>
+            {
+                component.likeStamp.SetActive(false);
+                component.nopeStamp.SetActive(false);
+            }).AddTo(component);
+
         }
 
         private void ShowNext(ProfileConfigComponent profileConfigComponent)
@@ -62,13 +69,24 @@ namespace Systems.Profile
             SwitchToNextProfile(rating);
         }
 
-        private void RateAndShowNext(Rating rating)
+        private void RateAndShowNext(RatingButtonComponent ratingComponent)
         {
             if (_profileConfig == null || _profiles == null) return;
-            _profileConfig.activeProfile.Value.Rating = rating;
+            _profileConfig.activeProfile.Value.Rating = ratingComponent.rating;
+
+            if (ratingComponent.rating == Rating.Like)
+            {
+                ratingComponent.likeStamp.SetActive(true);
+                ratingComponent.nopeStamp.SetActive(false);
+            }
+            else
+            {
+                ratingComponent.likeStamp.SetActive(false);
+                ratingComponent.nopeStamp.SetActive(true);
+            }
 
             if (!_profileConfig.debugSwitchProfiles || !_profiles.Any()) return;
-            SwitchToNextProfile(rating);
+            SwitchToNextProfile(ratingComponent.rating);
         }
 
 
