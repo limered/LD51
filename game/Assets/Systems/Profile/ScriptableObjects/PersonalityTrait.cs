@@ -16,7 +16,7 @@ namespace Systems.Profile.ScriptableObjects
         Sport,
         Hobby,
         TravelLocation,
-        Degree,
+        Shape,
         Relation,
         Religion,
         Personality,
