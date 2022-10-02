@@ -3,6 +3,7 @@ using System.Linq;
 using Assets.Utils;
 using SystemBase.Core;
 using SystemBase.Utils;
+using Systems.Profile.Events;
 using Systems.Profile.ScriptableObjects;
 using UniRx;
 using UnityEngine;
@@ -46,7 +47,17 @@ namespace Systems.Profile
         {
             if (_profileConfig == null || _profiles == null) return;
             _profileConfig.activeProfile.Value.Rating = rating;
-            _profiles.Enqueue(_profiles.Dequeue());
+            if (rating == Rating.Dislike)
+            {
+                _profiles.Enqueue(_profiles.Dequeue());
+            }
+            else
+            {
+                var profile = _profiles.Dequeue();
+                MessageBroker.Default
+                    .Publish(new ActiveProfileChangedEvent{lastProfile = profile});
+                
+            }
             _profileConfig.activeProfile.Value = _profiles.Peek();
         }
 

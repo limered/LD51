@@ -33,7 +33,7 @@ namespace Systems.Player
             wishList.wantPositives = allTraits.GetRange(0, positivesCount)
                 .Select(trait => new CheckedTrait {trait = trait, state = PersonalityCheckState.Unchecked})
                 .ToList();
-            wishList.wantNegatives = allTraits.GetRange(positivesCount + 1, positivesCount + 1 + negativesCount)
+            wishList.wantNegatives = allTraits.GetRange(positivesCount + 1, negativesCount)
                 .Select(trait => new CheckedTrait {trait = trait, state = PersonalityCheckState.Unchecked})
                 .ToList();
         }
