@@ -8,7 +8,6 @@ using Systems.Profile.Events;
 using Systems.Profile.ScriptableObjects;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Systems.Player
 {
@@ -113,10 +112,9 @@ namespace Systems.Player
                 trait = searchedTrait.trait, state = PersonalityCheckState.Unchecked
             });
 
-
             positives.Print(trait =>
                 trait.trait.text + " Full Occurence: " + traitOccurenceDictionary[trait.trait.text] +
-                " Occurence in Negatives" +
+                " Occurence in Negatives: " +
                 occurenceOfTraitsInNegativePeople.Find(occurence => occurence.trait.text == trait.trait.text)?
                     .occurence);
 
@@ -143,16 +141,10 @@ namespace Systems.Player
                     });
 
             foreach (var checkedTrait in foundPositive) checkedTrait.state = PersonalityCheckState.Checked;
-            // foreach (var checkedTrait in foundNegatives) checkedTrait.state = PersonalityCheckState.Checked; // change in favour of life system
-
 
             wishList.listsChanged.Execute();
             if (wishList.wantPositives.All(trait => trait.state == PersonalityCheckState.Checked))
                 MessageBroker.Default.Publish(new WinMessage {profiles = wishList.likedProfiles});
-
-            // change in favour of life system
-            // if (wishList.wantNegatives.All(trait => trait.state == PersonalityCheckState.Checked))
-            //     MessageBroker.Default.Publish(new LoseMessage {profiles = wishList.likedProfiles});
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using SystemBase;
-using SystemBase.Core;
+﻿using SystemBase.Core;
 using SystemBase.GameState.Messages;
 using SystemBase.Utils;
 using Systems.Player.Events;

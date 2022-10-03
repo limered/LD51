@@ -15,5 +15,5 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 86102c14ebefebf45ac73fb0ab35cc6f, type: 3}
   traits:
   - {fileID: 11400000, guid: 33a0af86fd5c8154b86a9084cb60384c, type: 2}
-  - {fileID: 11400000, guid: 2102fe7f33bf71b4db9627b5fd696b79, type: 2}
+  - {fileID: 11400000, guid: 3b5493031a362cb47b78f794c070b06d, type: 2}
   shouldNotBeRandom: 1

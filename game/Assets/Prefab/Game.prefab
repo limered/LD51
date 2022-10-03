@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 286322327}
   - component: {fileID: 1020032822024706890}
   - component: {fileID: 1846101694}
+  - component: {fileID: 667506799}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -77,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5367fec536264ed9bf4199c4e595843b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugSwitchProfiles: 0
 --- !u!114 &1846101694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,3 +95,18 @@ MonoBehaviour:
   wantNegativeMinMax: {x: 3, y: 3}
   wantPositives: []
   wantNegatives: []
+--- !u!114 &667506799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627871209551795109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de272189b1b64512b395f442ce393c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialLives: 3
+  livesLeft:
+    value: 0
