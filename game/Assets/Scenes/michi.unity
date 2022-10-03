@@ -633,6 +633,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 454850118, guid: ad3dcba9be0b24047b55a890ad5bd8d1, type: 3}
+      propertyPath: effects
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 667506799, guid: ad3dcba9be0b24047b55a890ad5bd8d1, type: 3}
       propertyPath: initialLives
       value: 3

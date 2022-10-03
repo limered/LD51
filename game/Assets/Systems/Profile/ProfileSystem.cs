@@ -140,7 +140,7 @@ namespace Systems.Profile
                     .Where(x => x != null)
                     .ToArray();
 
-            profile.text = randomProfileTextTemplate.CreateText(traits, profile.name);
+            profile.text = randomProfileTextTemplate.CreateText(traits, profile);
             profile.traits = traits;
 
             return profile;
