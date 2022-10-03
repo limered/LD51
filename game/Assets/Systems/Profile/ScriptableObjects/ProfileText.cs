@@ -64,7 +64,7 @@ namespace Systems.Profile.ScriptableObjects
                     if (template.Substring(i).StartsWith("{Name}"))
                     {
                         i += "{Name}".Length - 1;
-                        text += profile.name;
+                        text += profile.name.Split(" ").FirstOrDefault() ?? profile.name;
                         continue;
                     }
                     if (template.Substring(i).StartsWith("{Age}"))

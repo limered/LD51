@@ -130,13 +130,13 @@ namespace Systems.Profile
 
             var randomProfileTextTemplate = GetRandomTextTemplate();
             var traits =
-                profileImage.traits.Concat(
+                // profileImage.traits.Concat(
                         randomProfileTextTemplate.Categories
                             .Select(category => allTraits
                                 .Where(t => t.category == category)
                                 .ToArray()
                                 .RandomElement())
-                    )
+                    // )
                     .Where(x => x != null)
                     .ToArray();
 
