@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   template: "Hey there {Pets} lovers!\n\nWhat my best friend say about me: \n\"You
     are the most {Shape} {Personality} person I have ever known!\"\n\nI like {Personality}
-    people and go every Friday in the theater to watch {Movies} movies.\n"
+    people and go every friday in the theater to watch {Movies} movies.\n"

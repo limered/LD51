@@ -146,7 +146,11 @@ namespace Systems.Player
             wishList.listsChanged.Execute();
             if (wishList.wantPositives.All(trait => trait.state == PersonalityCheckState.Checked))
             {
-                MessageBroker.Default.Publish(new WinMessage { profiles = wishList.likedProfiles });
+                var profilesToShow = wishList.likedProfiles.Where(profile => profile.AllTraits()
+                    .Any(trait => wishList.wantPositives
+                        .Any(checkedTrait => checkedTrait.trait.text == trait.text)));
+
+                MessageBroker.Default.Publish(new WinMessage {profiles = profilesToShow.ToList()});
                 MessageBroker.Default.Publish(new GameMsgEnd());
             }
         }
