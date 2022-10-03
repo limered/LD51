@@ -50,18 +50,26 @@ namespace Systems.Player
             var profileTraits = msg.lastProfile.AllTraits();
             var foundPositive = wishList.wantPositives.FindAll(trait => profileTraits.Contains(trait.trait));
             var foundNegatives = wishList.wantNegatives.FindAll(trait => profileTraits.Contains(trait.trait));
-            
-            foreach (var checkedTrait in foundPositive) checkedTrait.state = PersonalityCheckState.Checked;
 
-            foreach (var checkedTrait in foundNegatives) checkedTrait.state = PersonalityCheckState.Checked;
+            if (foundNegatives.Any())
+                MessageBroker.Default.Publish(
+                    new LoseLifeMessage
+                    {
+                        profile = msg.lastProfile, 
+                        badTraits = foundNegatives.Select(trait => trait.trait).ToArray()
+                    });
+
+            foreach (var checkedTrait in foundPositive) checkedTrait.state = PersonalityCheckState.Checked;
+            // foreach (var checkedTrait in foundNegatives) checkedTrait.state = PersonalityCheckState.Checked; // change in favour of life system
+
 
             wishList.listsChanged.Execute();
-            
             if (wishList.wantPositives.All(trait => trait.state == PersonalityCheckState.Checked))
                 MessageBroker.Default.Publish(new WinMessage {profiles = wishList.likedProfiles});
-            
-            if (wishList.wantNegatives.All(trait => trait.state == PersonalityCheckState.Checked))
-                MessageBroker.Default.Publish(new LoseMessage {profiles = wishList.likedProfiles});
+
+            // change in favour of life system
+            // if (wishList.wantNegatives.All(trait => trait.state == PersonalityCheckState.Checked))
+            //     MessageBroker.Default.Publish(new LoseMessage {profiles = wishList.likedProfiles});
         }
     }
 }
