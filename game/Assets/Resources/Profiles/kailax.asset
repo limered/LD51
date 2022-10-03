@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fba33c74226593e40841ca3e3c49c25b, type: 3}
+  m_Name: kailax
+  m_EditorClassIdentifier: 
+  profileImage: {fileID: 11400000, guid: 86a21dd018028f74f94219a88e1fbd44, type: 2}
+  name: Kailax
+  text: 'I like swimming.
+
+
+    ...and fish. I mean my kids. I have 1047 kids.
+
+
+    Please
+    take me to the ocean, so i can swim.
+
+
+    Thank you.'
+  age: 3
+  distance: 55
+  traits:
+  - {fileID: 11400000, guid: c541a69d80a8812469a05943eb53437e, type: 2}
+  - {fileID: 11400000, guid: ab7920f522486d74b8a6fb7ef65d0263, type: 2}
+  - {fileID: 11400000, guid: e2478a0ae98363f4e9be703de0f3447f, type: 2}

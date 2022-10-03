@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 009057bbc0a14ee9b334e740c013f200, type: 3}
-  m_Name: lizzy
+  m_Name: axel
   m_EditorClassIdentifier: 
-  avatar: {fileID: 21300000, guid: cadd519de959e254e912ed1cd3259062, type: 3}
+  avatar: {fileID: 21300000, guid: 8ebd3ee637d8f3a4d89cb8fc2bcfedef, type: 3}
   traits:
-  - {fileID: 11400000, guid: 49f765ffabf42be43bfcc74dba10e6b8, type: 2}
-  shouldNotBeRandom: 1
-  ageRange: {x: 18, y: 30}
+  - {fileID: 11400000, guid: 60e2c26ff5cc6564c9725ddcae8439cf, type: 2}
+  shouldNotBeRandom: 0
+  ageRange: {x: 18, y: 44}
