@@ -36,6 +36,7 @@ namespace Systems.Player
             if (component.livesLeft.Value <= 0)
             {
                 MessageBroker.Default.Publish(new LoseMessage());
+                MessageBroker.Default.Publish(new GameMsgEnd());
             }
             
             MessageBroker.Default.Publish(new ShowHeartbreakNotificationEvt{profile = msg.profile});

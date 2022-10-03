@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SystemBase.Core;
+using SystemBase.GameState.Messages;
 using SystemBase.Utils;
 using Systems.Player.Events;
 using Systems.Profile;
@@ -144,7 +145,10 @@ namespace Systems.Player
 
             wishList.listsChanged.Execute();
             if (wishList.wantPositives.All(trait => trait.state == PersonalityCheckState.Checked))
-                MessageBroker.Default.Publish(new WinMessage {profiles = wishList.likedProfiles});
+            {
+                MessageBroker.Default.Publish(new WinMessage { profiles = wishList.likedProfiles });
+                MessageBroker.Default.Publish(new GameMsgEnd());
+            }
         }
     }
 }
