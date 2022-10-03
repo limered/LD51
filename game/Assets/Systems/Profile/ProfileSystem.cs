@@ -40,7 +40,7 @@ namespace Systems.Profile
                 .ToList().Randomize();
 
             _profiles = new Queue<DisplayProfile>(allProfiles
-                .Select(profile => new DisplayProfile {Profile = profile, Rating = Rating.Dislike}));
+                .Select(profile => new DisplayProfile {Profile = profile, Rating = Rating.None}));
 
             component.activeProfile.Value = _profiles.Peek();
 
@@ -53,10 +53,10 @@ namespace Systems.Profile
         {
             component.Command.Subscribe(RateAndShowNext).AddTo(component);
 
-            MessageBroker.Default.Receive<TickEvent>().Subscribe(_ =>
+            MessageBroker.Default.Receive<SetNopeStateEvent>().Subscribe(msg =>
             {
                 component.likeStamp.SetActive(false);
-                component.nopeStamp.SetActive(false);
+                component.nopeStamp.SetActive(msg.profile.Rating == Rating.Dislike);
             }).AddTo(component);
         }
 
@@ -78,7 +78,7 @@ namespace Systems.Profile
                 ratingComponent.likeStamp.SetActive(true);
                 ratingComponent.nopeStamp.SetActive(false);
             }
-            else
+            else if (ratingComponent.rating == Rating.Dislike)
             {
                 ratingComponent.likeStamp.SetActive(false);
                 ratingComponent.nopeStamp.SetActive(true);
@@ -91,7 +91,7 @@ namespace Systems.Profile
 
         private void SwitchToNextProfile(Rating rating)
         {
-            if (rating == Rating.Dislike)
+            if (rating is Rating.Dislike or Rating.None)
             {
                 _profiles.Enqueue(_profiles.Dequeue());
             }
@@ -99,12 +99,16 @@ namespace Systems.Profile
             {
                 var profile = _profiles.Dequeue();
                 MessageBroker.Default
-                    .Publish(new ActiveProfileChangedEvent {lastProfile = profile});
+                    .Publish(new LikedProfileEvent
+                    {
+                        likedProfile = profile
+                    });
             }
 
             if (_profiles.Any())
             {
                 _profileConfig.activeProfile.Value = _profiles.Peek();
+                MessageBroker.Default.Publish(new SetNopeStateEvent {profile = _profileConfig.activeProfile.Value});
             }
             else
             {
@@ -117,7 +121,7 @@ namespace Systems.Profile
             var profile = ScriptableObject.CreateInstance<ProfileSo>();
             profile.profileImage = profileImage;
             profile.name = AmericanNameGenerator.GenerateName(AmericanNameGenerator.Gender.Neutral);
-            profile.age = profileImage.ageRange.x + profileImage.ageRange.y > 0 
+            profile.age = profileImage.ageRange.x + profileImage.ageRange.y > 0
                 ? Random.Range(profileImage.ageRange.x, profileImage.ageRange.y)
                 : Random.Range(18, 99);
             profile.distance = Random.Range(0f, 250f);
