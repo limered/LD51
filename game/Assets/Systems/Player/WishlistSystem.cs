@@ -150,7 +150,11 @@ namespace Systems.Player
                     .Any(trait => wishList.wantPositives
                         .Any(checkedTrait => checkedTrait.trait.text == trait.text)));
 
-                MessageBroker.Default.Publish(new WinMessage {profiles = profilesToShow.ToList()});
+                MessageBroker.Default.Publish(new WinMessage
+                {
+                    profiles = profilesToShow.ToList(), 
+                    positiveTraits = wishList.wantPositives.Select(trait => trait.trait).ToList()
+                });
                 MessageBroker.Default.Publish(new GameMsgEnd());
             }
         }
