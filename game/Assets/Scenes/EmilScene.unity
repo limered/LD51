@@ -123,6 +123,33 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &454850111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 627871209551795109, guid: ad3dcba9be0b24047b55a890ad5bd8d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 667506797}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &454850118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454850111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee276a8390214dc5940bde1ded0ea2a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rain: {fileID: 667506798}
+  music: {fileID: 1533479093}
+  crossFadeFrames: 60
+  rainVolumeMinMax:
+    x: 0.8
+    y: 0.6
+  musicVolumeMinMax:
+    x: 0
+    y: 0.45
 --- !u!1001 &577258618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -268,6 +295,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1533479093, guid: ad3dcba9be0b24047b55a890ad5bd8d1, type: 3}
+      propertyPath: Pan2D
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1533479093, guid: ad3dcba9be0b24047b55a890ad5bd8d1, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1533479093, guid: ad3dcba9be0b24047b55a890ad5bd8d1, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 627871209551795109, guid: ad3dcba9be0b24047b55a890ad5bd8d1,
         type: 3}
       propertyPath: m_Name
@@ -328,13 +367,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5293699935002553489, guid: ad3dcba9be0b24047b55a890ad5bd8d1,
+        type: 3}
+      propertyPath: Pan2D
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293699935002553489, guid: ad3dcba9be0b24047b55a890ad5bd8d1,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad3dcba9be0b24047b55a890ad5bd8d1, type: 3}
+--- !u!82 &667506798 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5293699935002553489, guid: ad3dcba9be0b24047b55a890ad5bd8d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 667506797}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &893570576 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7861984916422007739, guid: e631e1f3f5a65854eb1e943849593856,
     type: 3}
   m_PrefabInstance: {fileID: 577258618}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1533479093 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1533479093, guid: ad3dcba9be0b24047b55a890ad5bd8d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 667506797}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1918748870
 PrefabInstance:
