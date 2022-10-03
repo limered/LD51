@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 009057bbc0a14ee9b334e740c013f200, type: 3}
-  m_Name: hot_andrew
+  m_Name: group
   m_EditorClassIdentifier: 
-  avatar: {fileID: 21300000, guid: c46df6b22aefe4a43ac2703f5ee87f80, type: 3}
+  avatar: {fileID: 21300000, guid: 85ddab68ce87f3e4892fae5b7ece09ca, type: 3}
   traits:
-  - {fileID: 11400000, guid: 2102fe7f33bf71b4db9627b5fd696b79, type: 2}
+  - {fileID: 11400000, guid: 688319ea1d358bf43b2ca7c61745259a, type: 2}
   shouldNotBeRandom: 0
-  ageRange: {x: 22, y: 32}
+  ageRange: {x: 20, y: 30}

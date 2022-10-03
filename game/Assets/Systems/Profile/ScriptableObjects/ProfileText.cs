@@ -41,7 +41,7 @@ namespace Systems.Profile.ScriptableObjects
             }
         }
 
-        public string CreateText(IEnumerable<PersonalityTrait> traits, string name)
+        public string CreateText(IEnumerable<PersonalityTrait> traits, ProfileSo profile)
         {
             var dict = new Dictionary<Category, List<string>>();
             foreach (var trait in traits)
@@ -64,7 +64,13 @@ namespace Systems.Profile.ScriptableObjects
                     if (template.Substring(i).StartsWith("{Name}"))
                     {
                         i += "{Name}".Length - 1;
-                        text += name;
+                        text += profile.name.Split(" ").FirstOrDefault() ?? profile.name;
+                        continue;
+                    }
+                    if (template.Substring(i).StartsWith("{Age}"))
+                    {
+                        i += "{Age}".Length - 1;
+                        text += profile.age;
                         continue;
                     }
 

@@ -19,7 +19,7 @@ namespace Systems.Player
         {
             wishList.likedProfiles = new List<DisplayProfile>();
 
-            MessageBroker.Default.Receive<ActiveProfileChangedEvent>()
+            MessageBroker.Default.Receive<LikedProfileEvent>()
                 .Subscribe(msg => SaveLikedProfiles(msg, wishList))
                 .AddTo(wishList);
 
@@ -28,7 +28,7 @@ namespace Systems.Player
                 .AddTo(wishList);
         }
 
-        public class TraitOccurence
+        private class TraitOccurence
         {
             public PersonalityTrait trait;
             public int occurence;
@@ -124,12 +124,12 @@ namespace Systems.Player
             wishList.listsChanged.Execute();
         }
 
-        private void SaveLikedProfiles(ActiveProfileChangedEvent msg, WishlistComponent wishList)
+        private void SaveLikedProfiles(LikedProfileEvent msg, WishlistComponent wishList)
         {
-            if (msg.lastProfile.Rating == Rating.Dislike) return;
-            wishList.likedProfiles.Add(msg.lastProfile);
+            if (msg.likedProfile.Rating != Rating.Like) return;
+            wishList.likedProfiles.Add(msg.likedProfile);
 
-            var profileTraits = msg.lastProfile.AllTraits();
+            var profileTraits = msg.likedProfile.AllTraits();
             var foundPositive = wishList.wantPositives.FindAll(trait => profileTraits.Contains(trait.trait));
             var foundNegatives = wishList.wantNegatives.FindAll(trait => profileTraits.Contains(trait.trait));
 
@@ -137,7 +137,7 @@ namespace Systems.Player
                 MessageBroker.Default.Publish(
                     new LoseLifeMessage
                     {
-                        profile = msg.lastProfile,
+                        profile = msg.likedProfile,
                         badTraits = foundNegatives.Select(trait => trait.trait).ToArray()
                     });
 
@@ -150,7 +150,11 @@ namespace Systems.Player
                     .Any(trait => wishList.wantPositives
                         .Any(checkedTrait => checkedTrait.trait.text == trait.text)));
 
-                MessageBroker.Default.Publish(new WinMessage {profiles = profilesToShow.ToList()});
+                MessageBroker.Default.Publish(new WinMessage
+                {
+                    profiles = profilesToShow.ToList(), 
+                    positiveTraits = wishList.wantPositives.Select(trait => trait.trait).ToList()
+                });
                 MessageBroker.Default.Publish(new GameMsgEnd());
             }
         }

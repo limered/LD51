@@ -8,6 +8,7 @@ namespace Systems.Menu
     {
         public GameObject showOnGameOver;
         public GameObject resultContainer;
+        public GameObject loseContainer;
         public GameObject loveResultPrefab;
         public readonly ReactiveCommand RestartCommand = new ReactiveCommand();
 

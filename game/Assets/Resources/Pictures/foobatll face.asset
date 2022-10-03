@@ -15,5 +15,5 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 74e49639bbbda0449bb1189156e01bd2, type: 3}
   traits:
   - {fileID: 11400000, guid: bbcfe9f5390247c4b8908882e805453c, type: 2}
-  - {fileID: 11400000, guid: 95d6cd6c60a8f66479555f602981a795, type: 2}
   shouldNotBeRandom: 0
+  ageRange: {x: 0, y: 0}
