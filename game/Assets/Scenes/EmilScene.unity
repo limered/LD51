@@ -268,6 +268,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 454850118, guid: ad3dcba9be0b24047b55a890ad5bd8d1, type: 3}
+      propertyPath: musicVolumeMinMax.y
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 1533479093, guid: ad3dcba9be0b24047b55a890ad5bd8d1, type: 3}
       propertyPath: m_audioClip
       value: 
