@@ -124,7 +124,7 @@ namespace Systems.Profile
             profile.age = profileImage.ageRange.x + profileImage.ageRange.y > 0
                 ? Random.Range(profileImage.ageRange.x, profileImage.ageRange.y)
                 : Random.Range(18, 99);
-            profile.distance = Random.Range(0f, 250f);
+            profile.distance = Random.Range(1f, 250f);
 
             var allTraits = ScriptableObjectSearcher.GetAllPersonalityTraits();
 
