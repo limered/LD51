@@ -91,7 +91,7 @@ Shader "Unlit/Window"
             }
             fixed4 frag (v2f i) : SV_Target
             {
-                float t = fmod(_Time.y * 0.3 + _T, 7200);
+                float t = fmod(_Time.y * 0.6 + _T, 7200);
 
                 float3 drops = Layer(i.uv, t, float2(.05, .03));
                 drops += Layer(i.uv * 1.23 + 7.54, t * 1.1, float2(.04, .02));

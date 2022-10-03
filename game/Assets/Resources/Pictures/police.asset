@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatar: {fileID: 21300000, guid: ca023fda7ea784a4b9a37025501ac640, type: 3}
   traits: []
+  shouldNotBeRandom: 0
+  ageRange: {x: 30, y: 50}

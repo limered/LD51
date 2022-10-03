@@ -1,13 +1,21 @@
-﻿using SystemBase;
+﻿using System.Collections;
 using SystemBase.Core;
 using SystemBase.GameState.Messages;
 using SystemBase.Utils;
 using Systems.Player.Events;
+using Systems.Profile;
 using UniRx;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Systems.Player
 {
+    public class ShowHeartbreakNotificationEvt
+    {
+        public DisplayProfile profile;
+
+    }
+
     [GameSystem]
     public class LifeSystem : GameSystem<LifeComponent, LifeUiComponent>
     {
@@ -28,7 +36,10 @@ namespace Systems.Player
             if (component.livesLeft.Value <= 0)
             {
                 MessageBroker.Default.Publish(new LoseMessage());
+                MessageBroker.Default.Publish(new GameMsgEnd());
             }
+            
+            MessageBroker.Default.Publish(new ShowHeartbreakNotificationEvt{profile = msg.profile});
         }
 
         public override void Register(LifeUiComponent component)
@@ -50,6 +61,10 @@ namespace Systems.Player
                 heartComponent.Heal();
             }
 
+            MessageBroker.Default.Receive<ShowHeartbreakNotificationEvt>()
+                .Subscribe(msg => ShowNotification(msg, ui))
+                .AddTo(ui);
+
             lifeComponent.livesLeft.Subscribe(healedHeartsLeft =>
             {
                 foreach (var heartComponent in hearts)
@@ -61,6 +76,40 @@ namespace Systems.Player
                     hearts[i].Heal();
                 }
             }).AddTo(ui);
+        }
+
+        private void ShowNotification(ShowHeartbreakNotificationEvt msg, LifeUiComponent ui)
+        {
+            ui.messageText.text = msg.profile.Profile.name.Split(' ')[0] + " broke your heart.";
+            
+            Observable.FromCoroutine(_ => ShowMessage(ui.messageContainer.GetComponent<RectTransform>(), 0, 24))
+                .Subscribe()
+                .AddTo(ui);
+        }
+
+        private IEnumerator ShowMessage(RectTransform message, float startPos, float endPos)
+        {
+            var animationSteps = 60;
+            var animationTranslate = (endPos - startPos) / animationSteps;
+            for (var i = 0; i < animationSteps; i++)
+            {
+                message.anchoredPosition = new Vector2(
+                    message.anchoredPosition.x, 
+                    message.anchoredPosition.y - animationTranslate);
+
+                yield return null;
+            }
+
+            yield return new WaitForSecondsRealtime(2f);
+            
+            for (var i = 0; i < animationSteps; i++)
+            {
+                message.anchoredPosition = new Vector2(
+                    message.anchoredPosition.x, 
+                    message.anchoredPosition.y + animationTranslate);
+                
+                yield return null;
+            }
         }
     }
 }

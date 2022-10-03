@@ -17,3 +17,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 939ca62a3d9c4224fac9f126eb182f69, type: 2}
   - {fileID: 11400000, guid: 95d6cd6c60a8f66479555f602981a795, type: 2}
   shouldNotBeRandom: 0
+  ageRange: {x: 25, y: 40}

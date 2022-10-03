@@ -35,9 +35,9 @@ namespace SystemBase
         public override void Init()
         {
             base.Init();
-            
-            IoC.RegisterSingleton(this);
-            IoC.RegisterSingleton<ISFXComparer, SFXComparer>();
+
+            IoC.RegisterSingleton(this, true);
+            IoC.RegisterSingleton<ISFXComparer, SFXComparer>(true);
         }
     }
 }

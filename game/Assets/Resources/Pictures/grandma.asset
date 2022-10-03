@@ -16,3 +16,4 @@ MonoBehaviour:
   traits:
   - {fileID: 11400000, guid: c0c0ee43db4d00547ad2eac8ce24ec9a, type: 2}
   shouldNotBeRandom: 0
+  ageRange: {x: 55, y: 70}

@@ -15,3 +15,4 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 5a813f2bca21f594d9185ffe7382c7d9, type: 3}
   traits: []
   shouldNotBeRandom: 0
+  ageRange: {x: 37, y: 45}

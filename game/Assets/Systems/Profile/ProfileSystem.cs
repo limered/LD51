@@ -117,8 +117,10 @@ namespace Systems.Profile
             var profile = ScriptableObject.CreateInstance<ProfileSo>();
             profile.profileImage = profileImage;
             profile.name = AmericanNameGenerator.GenerateName(AmericanNameGenerator.Gender.Neutral);
-            profile.age = Random.Range(18, 99);
-            profile.distance = Random.Range(0f, 1000f);
+            profile.age = profileImage.ageRange.x + profileImage.ageRange.y > 0 
+                ? Random.Range(profileImage.ageRange.x, profileImage.ageRange.y)
+                : Random.Range(18, 99);
+            profile.distance = Random.Range(0f, 250f);
 
             var allTraits = ScriptableObjectSearcher.GetAllPersonalityTraits();
 
