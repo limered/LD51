@@ -83,7 +83,8 @@ namespace Systems.Player
             ui.messageText.text = msg.profile.Profile.name.Split(' ')[0] + " broke your heart.";
             
             Observable.FromCoroutine(_ => ShowMessage(ui.messageContainer.GetComponent<RectTransform>(), 0, 24))
-                .Subscribe();
+                .Subscribe()
+                .AddTo(ui);
         }
 
         private IEnumerator ShowMessage(RectTransform message, float startPos, float endPos)
