@@ -7,6 +7,8 @@ namespace Systems.Menu
     public class RestartGameComponent : GameComponent
     {
         public GameObject showOnGameOver;
+        public GameObject resultContainer;
+        public GameObject loveResultPrefab;
         public readonly ReactiveCommand RestartCommand = new ReactiveCommand();
 
         public void RestartGame()
