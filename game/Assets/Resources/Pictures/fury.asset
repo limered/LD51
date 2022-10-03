@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatar: {fileID: 21300000, guid: 02f6d501a4de3b34d8e693d293850690, type: 3}
   traits:
-  - {fileID: 11400000, guid: c11486a6e02367c45887c427eb3d54ca, type: 2}
   - {fileID: 11400000, guid: cdd577bd2d082e142ba716405fa0b637, type: 2}
-  - {fileID: 11400000, guid: 2789ecd2757bc6d42b1d9023ed22e5e3, type: 2}
-  - {fileID: 11400000, guid: 74893dcaa319d4d4e94bb92836eca3c6, type: 2}
+  - {fileID: 11400000, guid: c0c0ee43db4d00547ad2eac8ce24ec9a, type: 2}
   shouldNotBeRandom: 0
-  ageRange: {x: 18, y: 400}
+  ageRange: {x: 100, y: 400}

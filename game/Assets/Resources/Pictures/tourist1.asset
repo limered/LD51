@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: tourist1
   m_EditorClassIdentifier: 
   avatar: {fileID: 21300000, guid: a5faff5d67169e04991132a79bb7b701, type: 3}
-  traits:
-  - {fileID: 11400000, guid: 55e7815b4e433fa4b99d3dceafa67f15, type: 2}
+  traits: []
   shouldNotBeRandom: 0
   ageRange: {x: 28, y: 40}
