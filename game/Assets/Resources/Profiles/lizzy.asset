@@ -15,7 +15,7 @@ MonoBehaviour:
   profileImage: {fileID: 11400000, guid: c8fbd5f940c1fb74db96114449e5f15d, type: 2}
   name: Lizzy
   text: "Hi, my name is Lizzy.\n\nI am searching for my dog. His name is Nothing.
-    \n\nI am a very thoughtfull person and i like mechanical keyboards."
+    \n\nI am a very thoughtfull person and I like mechanical keyboards."
   age: 3
   distance: 24
   traits:
