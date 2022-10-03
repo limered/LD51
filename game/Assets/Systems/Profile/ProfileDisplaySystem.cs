@@ -29,7 +29,7 @@ namespace Systems.Profile
             profileUIConfigDisplaySystem.imageElement.sprite = newProfile.Profile.profileImage.avatar;
             profileUIConfigDisplaySystem.nameTextElement.text = newProfile.Profile.name;
             profileUIConfigDisplaySystem.ageTextElement.text = $"{newProfile.Profile.age} years";
-            profileUIConfigDisplaySystem.distanceTextElement.text = $"{newProfile.Profile.distance:F1} miles away";
+            profileUIConfigDisplaySystem.distanceTextElement.text = $"{newProfile.Profile.distance:N0} miles away";
             profileUIConfigDisplaySystem.bioTextElement.text = newProfile.Profile.text;
             ResetScrollPosition(profileUIConfigDisplaySystem);
         }
