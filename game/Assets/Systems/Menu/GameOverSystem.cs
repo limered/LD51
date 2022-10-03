@@ -20,7 +20,7 @@ namespace Systems.Menu
                     component.resultContainer.SetActive(true);
 
                     var soulmates = _wishlist.wantPositives
-                        .Select(x => (profile: msg.profiles.First(p => p.Profile.traits.Any(t => t == x.trait)),
+                        .Select(x => (profile: msg.profiles.First(p => p.AllTraits().Any(t => t == x.trait)),
                             trait: x.trait))
                         .ToArray();
 
