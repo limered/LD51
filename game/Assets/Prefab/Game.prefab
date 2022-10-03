@@ -261,7 +261,7 @@ MonoBehaviour:
     y: 0.6
   musicVolumeMinMax:
     x: 0
-    y: 0.6
+    y: 0.5
 --- !u!1 &5641950384904608535
 GameObject:
   m_ObjectHideFlags: 0
