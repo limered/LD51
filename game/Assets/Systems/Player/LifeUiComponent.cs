@@ -1,5 +1,6 @@
 ﻿using System;
 using SystemBase.Core;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,7 @@ namespace Systems.Player
         public GameObject heartsContainer;
         
         public GameObject messageContainer;
-        public Text messageText;
+        public TextMeshProUGUI messageText;
 
         [NonSerialized] public readonly ReactiveProperty<LifeComponent> lifeComponent = new();
     }
