@@ -7,5 +7,7 @@ namespace Systems.ClockFace
     {
         public GameObject MainHand;
         public GameObject SecondHand;
+
+        public float hourHandStart;
     }
 }
