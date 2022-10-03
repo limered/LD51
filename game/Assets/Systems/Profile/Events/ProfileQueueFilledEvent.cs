@@ -11,8 +11,7 @@ namespace Systems.Profile.Events
         public List<PersonalityTrait> UsedTraits()
         {
             return queue.Aggregate(Enumerable.Empty<PersonalityTrait>(), 
-                (list, profile) => list.Concat(profile.AllTraits()))
-                .Distinct()
+                (list, profile) => list.Concat(profile.AllTraits().Distinct()))
                 .ToList();
         }
     }
