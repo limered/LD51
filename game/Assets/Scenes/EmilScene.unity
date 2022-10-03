@@ -328,8 +328,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1020032822024706890, guid: ad3dcba9be0b24047b55a890ad5bd8d1,
+        type: 3}
+      propertyPath: debugSwitchProfiles
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad3dcba9be0b24047b55a890ad5bd8d1, type: 3}
+--- !u!20 &893570576 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7861984916422007739, guid: e631e1f3f5a65854eb1e943849593856,
+    type: 3}
+  m_PrefabInstance: {fileID: 577258618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1918748870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -426,6 +437,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 839526456441375798, guid: 9d914cef451b25c47a979ad60515132b,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 893570576}
     - target: {fileID: 839526456441375799, guid: 9d914cef451b25c47a979ad60515132b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -615,6 +631,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270518045175163870, guid: 9d914cef451b25c47a979ad60515132b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4450968277022469122, guid: 9d914cef451b25c47a979ad60515132b,
         type: 3}
