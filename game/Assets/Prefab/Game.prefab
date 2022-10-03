@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5367fec536264ed9bf4199c4e595843b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugSwitchProfiles: 1
+  debugSwitchProfiles: 0
 --- !u!114 &1846101694
 MonoBehaviour:
   m_ObjectHideFlags: 0
