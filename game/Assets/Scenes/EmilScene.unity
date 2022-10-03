@@ -268,6 +268,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1533479093, guid: ad3dcba9be0b24047b55a890ad5bd8d1, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e5286695ee94d094a95fcdc7d7a1dbc2, type: 3}
     - target: {fileID: 627871209551795109, guid: ad3dcba9be0b24047b55a890ad5bd8d1,
         type: 3}
       propertyPath: m_Name
@@ -327,6 +331,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020032822024706890, guid: ad3dcba9be0b24047b55a890ad5bd8d1,
+        type: 3}
+      propertyPath: debugSwitchProfiles
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad3dcba9be0b24047b55a890ad5bd8d1, type: 3}
