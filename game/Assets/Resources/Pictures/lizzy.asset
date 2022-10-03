@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 009057bbc0a14ee9b334e740c013f200, type: 3}
-  m_Name: kailax
+  m_Name: lizzy
   m_EditorClassIdentifier: 
-  avatar: {fileID: 21300000, guid: 150e20fafaa85804382724e23f61aa2b, type: 3}
+  avatar: {fileID: 21300000, guid: cadd519de959e254e912ed1cd3259062, type: 3}
   traits:
-  - {fileID: 11400000, guid: e2478a0ae98363f4e9be703de0f3447f, type: 2}
-  - {fileID: 11400000, guid: c541a69d80a8812469a05943eb53437e, type: 2}
-  shouldNotBeRandom: 1
-  ageRange: {x: 2, y: 5}
+  - {fileID: 11400000, guid: 49f765ffabf42be43bfcc74dba10e6b8, type: 2}
+  - {fileID: 11400000, guid: 1b77188e1d8cf0444a6a49377819fe80, type: 2}
+  shouldNotBeRandom: 0
+  ageRange: {x: 18, y: 30}
